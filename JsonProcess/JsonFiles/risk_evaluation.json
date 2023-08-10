@@ -1,0 +1,42 @@
+{
+    "Frame0001": {
+        "Time": "0.5s",
+        "Text": "Text summary goes here...",
+        "Pedestrian": {}
+    },
+    "Frame0002": {
+        "Time": "1.0s",
+        "Text": "Text summary goes here...",
+        "Pedestrian": {}
+    },
+    "Frame0003": {
+        "Time": "1.5s",
+        "Text": "Text summary goes here...",
+        "Pedestrian": {}
+    },
+    "Frame0004": {
+        "Time": "2.0s",
+        "Text": "Text summary goes here...",
+        "Pedestrian": {}
+    },
+    "Frame0005": {
+        "Time": "2.5s",
+        "Text": "Text summary goes here...",
+        "Pedestrian": {}
+    },
+    "Frame0006": {
+        "Time": "3.0s",
+        "Text": "Text summary goes here...",
+        "Pedestrian": {}
+    },
+    "Frame0008": {
+        "Time": "4.0s",
+        "Text": "Text summary goes here...",
+        "Pedestrian": {}
+    },
+    "Frame0009": {
+        "Time": "4.5s",
+        "Text": "Text summary goes here...",
+        "Pedestrian": {}
+    }
+}

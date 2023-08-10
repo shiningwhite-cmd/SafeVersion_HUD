@@ -5,7 +5,7 @@ using System.Text;
 using System.Net;
 using System.Net.NetworkInformation; 
   
-public class DataReceiver : MonoBehaviour  
+public class EyeTrackerReceiver : MonoBehaviour  
 {  
     // 获取屏幕宽度  
     int screenWidth = Screen.width;  

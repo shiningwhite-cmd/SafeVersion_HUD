@@ -89,6 +89,9 @@ async def stream_rtsp():
                 unity_socket, client_address = server_socket.accept()
                 print("Unity已连接")
                 while(True):
+                    ################################
+                    ### 时间戳同步算法 ##############
+                    ################################
                     frame, frame_timestamp = await scene_stream.get()
                     gaze, gaze_timestamp = await gaze_stream.get()
                     while gaze_timestamp is None or frame_timestamp is None:
