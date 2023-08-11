@@ -356,6 +356,7 @@ GameObject:
   - component: {fileID: 580122326}
   - component: {fileID: 580122327}
   - component: {fileID: 580122328}
+  - component: {fileID: 580122329}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -462,6 +463,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jsonFilePath: ./Assets/JsonProcess/JsonFiles/Bbox_Video_0194_.json
+--- !u!114 &580122329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580122319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 488d4b0053240b742957d5d2fea56970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverIP: 127.0.0.1
+  serverPort: 1111
 --- !u!224 &641706620 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3189050310798385125, guid: c225cbb70f682d94481c624c0fdb77a6, type: 3}
