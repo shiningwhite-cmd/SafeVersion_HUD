@@ -37,7 +37,7 @@ public class JsonMessageGet : MonoBehaviour
             
             yield return StartCoroutine(ReceiveFromPython()); 
 
-            yield return new WaitForSeconds(1f); // 每隔1秒发送一次信息  
+            yield return new WaitForSeconds(0.3333f); // 每隔1秒发送一次信息  
         }    
     }  
 
@@ -48,7 +48,7 @@ public class JsonMessageGet : MonoBehaviour
             if (client == null || !client.Connected)  
             {  
                 client = new TcpClient(pythonHost, pythonPort);  
-                stream = client.GetStream();  
+                stream = client.GetStream(); 
             }  
   
             byte[] data = Encoding.UTF8.GetBytes(message);  
@@ -72,17 +72,32 @@ public class JsonMessageGet : MonoBehaviour
         // ListWrapper listWrapper = JsonUtility.FromJson<ListWrapper>(data);  
         // receivedData.Add(listWrapper);  
         string[] jsonStrings = data.Split(new string[] { "|#|" }, StringSplitOptions.None);  
+        int index = 0;
+        int maxindex = 0;
   
         foreach (string jsonString in jsonStrings)  
         {  
+            if(maxindex < index)
+                maxindex = index;
             // 解析接收到的JSON字符串  
             ListWrapper listWrapper = JsonUtility.FromJson<ListWrapper>(jsonString);  
-    
-            foreach (float num in listWrapper.list)  
-            {  
-                Debug.Log(num);  
-            }  
+            Vector2 BboxBL = new Vector2(listWrapper.list[0], 1080 - listWrapper.list[1]);
+            Vector2 BboxTR = new Vector2(listWrapper.list[2], 1080 - listWrapper.list[3]);
+            JsonMarkManager.SendMessage(new MarkMessage(index, BboxBL, BboxTR));
+            index++;
+            // foreach (float num in listWrapper.list)  
+            // {  
+            //     Debug.Log(num);  
+            // }  
         }  
+
+        if(index<maxindex)
+        {
+            for(int i = index; i <= maxindex; i++)
+            {
+                DeleteMarkManager.SendMessage(i);
+            }
+        }
   
         yield return null;  
     }   
@@ -99,5 +114,7 @@ public class JsonMessageGet : MonoBehaviour
     private class ListWrapper  
     {  
         public float[] list;  
-    }  
+    }
+
+      
 }  
