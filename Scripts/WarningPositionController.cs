@@ -32,12 +32,16 @@ public class WarningPositionController : MonoBehaviour
         int markID = mMessage.MarkID;
         Vector2 markPosV2 = (mMessage.BboxBL + mMessage.BboxTR)/2;
         Vector3 markPos = new Vector3(markPosV2.x, markPosV2.y, 0);
-        if(markPos != Vector3.zero)
+        Vector2 diagonal = ( mMessage.BboxBL - mMessage.BboxTR);
+        diagonal.x = -diagonal.x;
+        if(diagonal.x > 20f && diagonal.y > 40f && markPos.x > 1f && markPos.y > 1f)
         {
             if(ExistingMark.Contains(markID))
             {
                 GameObject mark = GameObject.Find("CarWarning"+markID.ToString());
                 mark.transform.position = markPos;
+                
+                // mark.GetComponent<WarningPosChanger>().MoveWarning(markPos);
             }
             else
             {
