@@ -54,13 +54,19 @@ for i in range(0, json_length):
 
         # 访问JSON数据  
         bbox_data = data[index]['bbox']  
+
+        value_str = ""
         
         # 打印bbox数据  
         for key, value in bbox_data.items():  
             print(f'Key: {key}')  
             print(f'Value: {value}')  
             print('---') 
+            value_str = value_str + json.dumps({"list":value}) + "|#|"
+  
 
+        # 发送数据给Unity  
+        client_socket.send(value_str.encode()) 
         GetMessages = False 
 
   
