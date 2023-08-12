@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7ee2788bb8856254bb592f223581ca2f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ce987f6a9de05834eaece56b4d599d15, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -227,5 +227,4 @@ MonoBehaviour:
   target: {fileID: 0}
   follower: {fileID: 4899676295242826913}
   mark: {fileID: 0}
-  TestMode: 0
   rotationSpeed: 2.5

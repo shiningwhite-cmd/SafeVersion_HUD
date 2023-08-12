@@ -34,7 +34,8 @@ public class WarningPositionController : MonoBehaviour
         Vector3 markPos = new Vector3(markPosV2.x, markPosV2.y, 0);
         Vector2 diagonal = ( mMessage.BboxBL - mMessage.BboxTR);
         diagonal.x = -diagonal.x;
-        if(diagonal.x > 20f && diagonal.y > 40f && markPos.x > 1f && markPos.y > 1f)
+        // Debug.Log(diagonal);
+        if(diagonal.x > 40f && diagonal.y > 40f && markPos.x > 1f && markPos.y > 1f)
         {
             if(ExistingMark.Contains(markID))
             {

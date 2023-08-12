@@ -37,7 +37,7 @@ public class JsonMessageGet : MonoBehaviour
             
             yield return StartCoroutine(ReceiveFromPython()); 
 
-            yield return new WaitForSeconds(0.3333f); // 每隔1秒发送一次信息  
+            yield return new WaitForSeconds(0.3333f);
         }    
     }  
 
