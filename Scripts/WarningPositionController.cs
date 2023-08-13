@@ -40,9 +40,9 @@ public class WarningPositionController : MonoBehaviour
             if(ExistingMark.Contains(markID))
             {
                 GameObject mark = GameObject.Find("CarWarning"+markID.ToString());
-                mark.transform.position = markPos;
+                // mark.transform.position = markPos;
                 
-                // mark.GetComponent<WarningPosChanger>().MoveWarning(markPos);
+                mark.GetComponent<WarningPosChanger>().MoveWarning(markPos);
             }
             else
             {

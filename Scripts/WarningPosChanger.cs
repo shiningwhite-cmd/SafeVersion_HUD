@@ -9,9 +9,11 @@ public class WarningPosChanger : MonoBehaviour
   
     private Vector3 startPosition;  
     private float elapsedTime = 0f;  
+
+    private bool isCoroutineStarted = false;
   
     private void Start()  
-    {  
+    {   
     }  
   
     private IEnumerator MoveToTarget()  
@@ -30,6 +32,15 @@ public class WarningPosChanger : MonoBehaviour
     {
         startPosition = transform.position;
         targetPosition = target;  
-        StartCoroutine(MoveToTarget());  
+        StartCoroutineIfNeeded();
     }
+
+    private void StartCoroutineIfNeeded()  
+    {  
+        if (!isCoroutineStarted)  
+        {  
+            StartCoroutine(MoveToTarget());  
+            isCoroutineStarted = true;  
+        }  
+    } 
 }  
