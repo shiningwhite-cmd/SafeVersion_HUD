@@ -59,7 +59,7 @@ public class EyeTrackerReceiver : MonoBehaviour
                     // 在这里可以根据需要处理坐标数据，例如控制对象的移动或视角等  
                     // ...  
                     //Debug.Log("Received coordinates - X: " + (960 - x/2) + ", Y: " + (490-y/2));         
-                    EyeTrackManager.SendMessage(new Vector2(x/2, 490-y/2));
+                    EyeTrackManager.SendMessage(new Vector2(1920.0f - (x/1920.0f)*screenWidth*0.5f, 540.0f + (y/1080.0f)*screenHeight*0.5f));
                     // 继续异步读取数据  
                     stream.BeginRead(buffer, 0, buffer.Length, OnReceiveData, null);  
                 }  

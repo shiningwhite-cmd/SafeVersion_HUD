@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TestModeManager : MonoBehaviour
 {
-    public static bool TestMode = true;
+    public static bool TestMode = false;
 
     public static bool returnTestMode()
     {

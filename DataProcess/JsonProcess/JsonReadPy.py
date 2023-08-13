@@ -8,7 +8,7 @@ current_directory = os.getcwd()
 print("当前工作目录：", current_directory)
 
 # 读取JSON文件  
-with open('Assets\DataProcess\JsonProcess\JsonFiles\Bbox_Video_0194_.json') as file:  
+with open(r'Assets/DataProcess/JsonProcess/JsonFiles/risk_evaluation.json') as file:  
     data = json.load(file)  
   
 
@@ -46,23 +46,30 @@ for i in range(0, json_length):
     if(GetMessages): 
         
         if(i+1<10):
-            index = '000'+str(i+1)
+            index = 'Frame000'+str(i+1)
         else:
-            index = '00'+str(i+1)
+            index = 'Frame00'+str(i+1)
 
         print(index)  
 
         # 访问JSON数据  
-        bbox_data = data[index]['bbox']  
+        bbox_data = data[index]['Pedestrian']  
 
         value_str = ""
         
         # 打印bbox数据  
         for key, value in bbox_data.items():  
             print(f'Key: {key}')  
-            print(f'Value: {value}')  
+            print(f'Value: {value}') 
+            string_list = value[0]
+            number_list = value[1]
+            
+            print("String List:", string_list)  
+            print("Number List:", number_list)  
             print('---') 
-            value_str = value_str + json.dumps({"list":value}) + "|#|"
+
+            if number_list[0] is not None:
+                value_str = value_str + json.dumps({"list":number_list}) + "|#|"
   
 
         # 发送数据给Unity  

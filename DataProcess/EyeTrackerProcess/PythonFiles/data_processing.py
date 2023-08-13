@@ -234,7 +234,7 @@ async def stream_rtsp():
                             # gazex_cvrtd = dst_point[0] / dst_point[2]
                             # gazey_cvrtd = dst_point[1] / dst_point[2]
                             # if(dst_point[0]>0 and dst_point[0]<1920 and dst_point[1]>0 and dst_point[1]<1080):
-                            print("x ：", 960 - dst_point[0]/2, "y:", 490 - dst_point[1]/2)
+                            print("x ：", dst_point[0], "y:", dst_point[1])
                             # else:
                             #     print("out of range")
                             # 将数据转换为字符串
