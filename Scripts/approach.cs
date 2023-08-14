@@ -16,6 +16,8 @@ public class approach : MonoBehaviour
     private Vector3 originalScale; 
     private Animator anima;
     private Animator followAnima;
+    private Vector3 EyePos;
+    private Vector3 imagePosition;
   
     private void Start()  
     {  
@@ -26,12 +28,24 @@ public class approach : MonoBehaviour
         if(follow != null)
             followAnima = follow.GetComponent<Animator>();
     }  
+    
+    private void OnEnable()  
+    {  
+        EyeTrackManager.EyeTrack += ReceiveMassage;  
+    }  
+  
+    private void OnDisable()  
+    {  
+        EyeTrackManager.EyeTrack -= ReceiveMassage;  
+    } 
   
     private void Update()  
     {  
-        Vector3 mousePosition = Input.mousePosition;  
-        Vector3 imagePosition = Camera.main.WorldToScreenPoint(image.transform.position);  
-        float distance = Vector3.Distance(mousePosition, imagePosition);  
+        if(EyePos == null)
+            EyePos = Vector3.zero;
+        imagePosition = this.gameObject.transform.position;  
+        float distance = Vector3.Distance(EyePos, imagePosition);  
+        // Debug.Log(imagePosition);
   
         if (distance < scaleThreshold)  
         {     
@@ -52,4 +66,9 @@ public class approach : MonoBehaviour
         follow = follower;
         followAnima = follow.GetComponent<Animator>();
     } 
+
+    private void ReceiveMassage(Vector2 Pos)
+    {
+        EyePos = new Vector3(Pos.x, Pos.y, 0);
+    }
 }  

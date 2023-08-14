@@ -127,18 +127,37 @@ async def stream_rtsp():
                         ids = ids.flatten()
                         refPts = []
 
-                        # loop over the IDs of the ArUco markers in top-left, top-right,
-                        # bottom-right, and bottom-left order
-                        for i in (1, 2, 3, 4):
-                            # grab the index of the corner with the current ID and append the
-                            # corner (x, y)-coordinates to our list of reference points
-                            # rearrange, from raw ids list to ranked list
-                            j = np.squeeze(np.where(ids == i))
-                            corner = np.squeeze(corners[j])
-                            refPts.append(corner)
-                            # unpack our ArUco reference points and use the reference points to
-                            # define the *destination* transform matrix, making sure the points
-                            # are specified in top-left, top-right, bottom-right, and bottom-left order
+                        print("strat")
+
+                        # # loop over the IDs of the ArUco markers in top-left, top-right,
+                        # # bottom-right, and bottom-left order
+                        # for i in (1, 2, 3, 4):
+                        #     # grab the index of the corner with the current ID and append the
+                        #     # corner (x, y)-coordinates to our list of reference points
+                        #     # rearrange, from raw ids list to ranked list
+                        #     j = np.squeeze(np.where(ids == i))
+                        #     print(j)
+                        #     print(type(j))
+                        #     # j = int(j[0])
+                        #     # corner = np.squeeze(np.array(corners)[j])
+                        #     corner = np.squeeze(corners[j])
+                        #     refPts.append(corner)
+                        #     print(refPts)
+                        #     # unpack our ArUco reference points and use the reference points to
+                        #     # define the *destination* transform matrix, making sure the points
+                        #     # are specified in top-left, top-right, bottom-right, and bottom-left order
+                        
+                        ##############################
+                        ### 不确定的巨大魔改 ##########
+                        ##############################
+                        corner = np.squeeze(corners[3])
+                        refPts.append(corner)
+                        corner = np.squeeze(corners[2])
+                        refPts.append(corner)
+                        corner = np.squeeze(corners[0])
+                        refPts.append(corner)
+                        corner = np.squeeze(corners[1])
+                        refPts.append(corner)
                         (refPtTL, refPtTR, refPtBR, refPtBL) = refPts
                         dstMat = np.array(
                             [
@@ -245,10 +264,10 @@ async def stream_rtsp():
                             # 等待一段时间，控制数据生成的速率
                             # time.sleep(0.1)
 
-                        elif i % 50 == 0:
-                            logging.info(
-                                "No gaze data received. Have you tried putting on the glasses?"
-                            )
+                        # elif i % 50 == 0:
+                        #     logging.info(
+                        #         "No gaze data received. Have you tried putting on the glasses?"
+                        #     )
 
                     #################################################
                     ### 视频                                      ###
@@ -258,8 +277,8 @@ async def stream_rtsp():
 
                     # cv2.waitKey(50)  # type: ignore
                     if cv2.waitKey(1) & 0xFF == 27:
-                        unity_socket.close()
-                        server_socket.close()
+                        # unity_socket.close()
+                        # server_socket.close()
                         break
                     # if 0xFF == ord("q"):  # 按下 'q' 键退出
                     #     break

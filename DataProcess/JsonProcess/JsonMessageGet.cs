@@ -11,6 +11,12 @@ public class JsonMessageGet : MonoBehaviour
     public string pythonHost = "localhost"; // Python文件的主机名  
     public int pythonPort = 1111; // Python文件的端口号  
   
+    // 获取屏幕宽度  
+    int screenWidth = Screen.width;  
+    
+    // 获取屏幕高度  
+    int screenHeight = Screen.height; 
+
     private Socket clientSocket;  
   
     private TcpClient client;  
@@ -81,8 +87,8 @@ public class JsonMessageGet : MonoBehaviour
                 maxindex = index;
             // 解析接收到的JSON字符串  
             ListWrapper listWrapper = JsonUtility.FromJson<ListWrapper>(jsonString);  
-            Vector2 BboxBL = new Vector2(listWrapper.list[0], 1080 - listWrapper.list[1]);
-            Vector2 BboxTR = new Vector2(listWrapper.list[2], 1080 - listWrapper.list[3]);
+            Vector2 BboxBL = new Vector2((listWrapper.list[0]/1920.0f)*screenWidth, screenHeight - (listWrapper.list[1]/1080.0f)*screenHeight);
+            Vector2 BboxTR = new Vector2((listWrapper.list[2]/1920.0f)*screenWidth, screenHeight - (listWrapper.list[3]/1080.0f)*screenHeight);
             JsonMarkManager.SendMessage(new MarkMessage(index, BboxBL, BboxTR));
             index++;
             // foreach (float num in listWrapper.list)  
