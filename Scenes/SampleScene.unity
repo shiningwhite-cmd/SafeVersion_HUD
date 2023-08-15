@@ -344,6 +344,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pythonHost: localhost
   pythonPort: 1111
+  ratio: 0.04
+  resolution: {x: 1280, y: 720}
 --- !u!114 &580122330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -970,7 +972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9faf097d1ef12e0479a95cf54cf1f492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  videoWaitforSecond: 0.5
+  videoWaitforSecond: 0
   videoPlayer: {fileID: 1202140523}
 --- !u!1 &1266301696
 GameObject:
