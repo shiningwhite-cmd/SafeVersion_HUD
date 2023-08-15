@@ -17,9 +17,10 @@ public class HumanWarningReceiver : MonoBehaviour
         HumanWarningManager.HumanWarning -= ReceiveMassage;  
     } 
 
-    private void ReceiveMassage(Transform target)
+    private void ReceiveMassage(Transform target, int id)
     {
         GameObject follower = Instantiate(humanPrefab, this.gameObject.transform);
+        follower.name = "HumanFollower"+id.ToString();
         follower.GetComponent<EyeMarkFollower>().SetTarge(target);
         target.gameObject.GetComponent<blink>().SetFollower(follower.transform.GetChild(1).gameObject);
     }

@@ -5,8 +5,11 @@ using UnityEngine;
 public class WarningPositionController : MonoBehaviour
 {
     public GameObject CarMarkPrefab;
+    public GameObject HumanMarkPrefab;
     public Transform MarkPanel;
-    private List<int> ExistingMark = new List<int>();
+    // 存储现有的mark id
+    private List<int> ExistingCarMark = new List<int>();
+    private List<int> ExistingHumanMark = new List<int>();
     private bool TestMode = false;
   
     void Start()
@@ -29,36 +32,79 @@ public class WarningPositionController : MonoBehaviour
     
     private void ReceiveMassage(MarkMessage mMessage)
     {
+        bool isperson = mMessage.isPerson;
         int markID = mMessage.MarkID;
         Vector2 markPosV2 = (mMessage.BboxBL + mMessage.BboxTR)/2;
         Vector3 markPos = new Vector3(markPosV2.x, markPosV2.y, 0);
         Vector2 diagonal = ( mMessage.BboxBL - mMessage.BboxTR);
         diagonal.x = -diagonal.x;
-        // Debug.Log(diagonal);
-        if(diagonal.x > 40f && diagonal.y > 40f && markPos.x > 1f && markPos.y > 1f)
+        if(isperson)
         {
-            if(ExistingMark.Contains(markID))
+            //  如果存在mark，刷新位置
+            if(ExistingHumanMark.Contains(markID))
+            {
+                GameObject mark = GameObject.Find("HumanWarning"+markID.ToString());
+                // mark.transform.position = markPos;
+                
+                mark.GetComponent<WarningPosChanger>().MoveWarning(markPos);
+                mark.GetComponent<RectTransform>().sizeDelta = diagonal;
+            }
+            // 如果不存在，复制一个
+            else
+            {
+                Debug.Log("Person");
+                ExistingHumanMark.Add(markID);
+                GameObject mark = Instantiate(HumanMarkPrefab,  markPos, new Quaternion(), MarkPanel);
+                mark.name = "HumanWarning"+markID.ToString();
+                mark.GetComponent<HumanWarningSender>().Send(markID);
+                mark.GetComponent<RectTransform>().sizeDelta = diagonal;
+            }
+        }
+        else
+        {
+            
+            //  如果存在mark，刷新位置
+            if(ExistingCarMark.Contains(markID))
             {
                 GameObject mark = GameObject.Find("CarWarning"+markID.ToString());
                 // mark.transform.position = markPos;
                 
                 mark.GetComponent<WarningPosChanger>().MoveWarning(markPos);
             }
+            // 如果不存在，复制一个
             else
             {
-                ExistingMark.Add(markID);
+                ExistingCarMark.Add(markID);
                 GameObject mark = Instantiate(CarMarkPrefab,  markPos, new Quaternion(), MarkPanel);
                 mark.name = "CarWarning"+markID.ToString();
+                mark.GetComponent<CarWarningSender>().Send(markID);
             }
         }
     }
 
-    private void DeleteMark(int id)
+    private void DeleteMark(bool isPerson, int id)
     {
-        GameObject mark = GameObject.Find("CarWarning"+id.ToString()); // 获取GameObject的引用  
-  
-        
-        Destroy(mark);
+        if(isPerson)
+        {
+            GameObject mark = GameObject.Find("HumanWarning"+id.ToString()); // 获取GameObject的引用  
+            GameObject follower = GameObject.Find("HumanFollower"+id.ToString()); // 获取GameObject的引用  
+
+            ExistingHumanMark.Remove(id);
+            
+            Destroy(mark);
+            Destroy(follower);
+
+        }
+        else
+        {
+            GameObject mark = GameObject.Find("CarWarning"+id.ToString()); // 获取GameObject的引用  
+            GameObject follower = GameObject.Find("CarFollower"+id.ToString()); // 获取GameObject的引用  
+
+            ExistingCarMark.Remove(id);
+            
+            Destroy(mark);
+            Destroy(follower);
+        }
     }
 
 }

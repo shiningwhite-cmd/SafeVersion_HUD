@@ -4,8 +4,10 @@ using System.Net.Sockets;
 using System.Text;  
 using UnityEngine;  
 using System.Collections;
-using System.Collections.Generic; 
-  
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using System.Text.RegularExpressions; 
+
 public class JsonMessageGet : MonoBehaviour  
 {  
     public string pythonHost = "localhost"; // Python文件的主机名  
@@ -21,19 +23,10 @@ public class JsonMessageGet : MonoBehaviour
   
     private TcpClient client;  
     private NetworkStream stream; 
-    // private void Start()  
-    // {  
-    //     // 创建Socket对象  
-    //     clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);  
-          
-    //     // 连接服务器  
-    //     IPAddress serverAddress = IPAddress.Parse(serverIP);  
-    //     IPEndPoint serverEndPoint = new IPEndPoint(serverAddress, serverPort);  
-    //     clientSocket.Connect(serverEndPoint);  
-          
-         
-    // }  
-
+    int maxCarIndex = 0;
+    int maxPersonIndex = 0;
+    public float ratio = 0.04f;
+    public Vector2 resolution = new Vector2(1280.0f, 720.0f);
 
     IEnumerator Start()  
     {   
@@ -41,9 +34,11 @@ public class JsonMessageGet : MonoBehaviour
         {  
             SendToPython("true");  
             
-            yield return StartCoroutine(ReceiveFromPython()); 
+            StartCoroutine(ReceiveFromPython()); 
 
-            yield return new WaitForSeconds(0.3333f);
+            yield return new WaitForSeconds(0.5f);
+            // Debug.Log("frame:" + frame);
+            // frame++;
         }    
     }  
 
@@ -68,42 +63,101 @@ public class JsonMessageGet : MonoBehaviour
 
     IEnumerator ReceiveFromPython()  
     {  
+        // 解析接收到的JSON字符串   
         List<ListWrapper> receivedData = new List<ListWrapper>();       
         byte[] buffer = new byte[1024];  
         int bytesRead = stream.Read(buffer, 0, buffer.Length);  
-        string data = Encoding.UTF8.GetString(buffer, 0, bytesRead);  
-        // Debug.Log(data);
-  
-        // 解析接收到的JSON字符串  
-        // ListWrapper listWrapper = JsonUtility.FromJson<ListWrapper>(data);  
-        // receivedData.Add(listWrapper);  
-        string[] jsonStrings = data.Split(new string[] { "|#|" }, StringSplitOptions.None);  
-        int index = 0;
-        int maxindex = 0;
-  
-        foreach (string jsonString in jsonStrings)  
-        {  
-            if(maxindex < index)
-                maxindex = index;
-            // 解析接收到的JSON字符串  
-            ListWrapper listWrapper = JsonUtility.FromJson<ListWrapper>(jsonString);  
-            Vector2 BboxBL = new Vector2((listWrapper.list[0]/1920.0f)*screenWidth, screenHeight - (listWrapper.list[1]/1080.0f)*screenHeight);
-            Vector2 BboxTR = new Vector2((listWrapper.list[2]/1920.0f)*screenWidth, screenHeight - (listWrapper.list[3]/1080.0f)*screenHeight);
-            JsonMarkManager.SendMessage(new MarkMessage(index, BboxBL, BboxTR));
-            index++;
-            // foreach (float num in listWrapper.list)  
-            // {  
-            //     Debug.Log(num);  
-            // }  
-        }  
+        string data = Encoding.UTF8.GetString(buffer, 0, bytesRead); 
+        int carIndex = 0;
+        int personIndex = 0;
 
-        if(index<maxindex)
-        {
-            for(int i = index; i <= maxindex; i++)
+        string[] jsonStrings = data.Split(new string[] { "|*|" }, StringSplitOptions.None); 
+        string[] personStrings = jsonStrings[1].Split(new string[] { "|#|" }, StringSplitOptions.None);
+        string[] carStrings = jsonStrings[0].Split(new string[] { "|#|" }, StringSplitOptions.None);  
+        // Debug.Log(jsonStrings[0]); 
+        Debug.Log(jsonStrings[1]);
+
+        
+        foreach (string carString in carStrings)  
+        {  
+            if(carString == "")
             {
-                DeleteMarkManager.SendMessage(i);
+                // Debug.Log("CarBreak");
+                break;
             }
+
+            if(carString == "null")
+            {
+                // Debug.Log("CarNone");
+                break;
+            }
+
+            // 解析接收到的JSON字符串  
+            // ListWrapper listWrapper = JsonUtility.FromJson<ListWrapper>(carString); 
+            List<float> listWrapper = HandleData(carString);
+            // Debug.Log(listWrapper);
+            Vector2 BboxBL = new Vector2((listWrapper[0]/resolution.x)*screenWidth, screenHeight - (listWrapper[1]/resolution.y)*screenHeight);
+            
+            Vector2 BboxTR = new Vector2((listWrapper[2]/resolution.x)*screenWidth, screenHeight - (listWrapper[3]/resolution.y)*screenHeight);
+            
+            JsonMarkManager.SendMessage(new MarkMessage(false, carIndex, BboxBL, BboxTR));
+            carIndex++;
+            
+            if(maxCarIndex < carIndex)
+                maxCarIndex = carIndex;
         }
+
+        if(carIndex < maxCarIndex)
+        {
+            for(int i = carIndex; i < maxCarIndex; i++)
+            {
+                // Debug.Log(maxCarIndex);
+                DeleteMarkManager.SendMessage(false, i);
+            }
+            maxCarIndex = carIndex;
+        }
+        
+        foreach (string personString in personStrings)  
+        {  
+            Debug.Log(personIndex);
+            if(personString == "")
+            {
+                Debug.Log("Personbreak");
+                break;
+            }
+
+            if(personString == "null")
+            {
+                Debug.Log("PersonNone");
+                break;
+            }
+
+            // 解析接收到的JSON字符串  
+            // ListWrapper listWrapper = JsonUtility.FromJson<ListWrapper>(personString); 
+            List<float> listWrapper = HandleData(personString);
+            // Debug.Log(personString); 
+            Vector2 BboxBL = new Vector2((listWrapper[0]/resolution.x)*screenWidth, screenHeight - (listWrapper[1]/resolution.y)*screenHeight);
+            Vector2 BboxTR = new Vector2((listWrapper[2]/resolution.x)*screenWidth, screenHeight - (listWrapper[3]/resolution.y)*screenHeight);
+            // Debug.Log("Send2Person");
+            Vector2 diagonal = (BboxBL - BboxTR);
+            diagonal.x = -diagonal.x;
+            if(diagonal.x > screenWidth * ratio && diagonal.y > screenHeight * ratio )
+            {
+                JsonMarkManager.SendMessage(new MarkMessage(true, personIndex, BboxBL, BboxTR));
+                personIndex++;
+            }
+            if(maxPersonIndex < personIndex)
+                maxPersonIndex = personIndex;
+        }
+        if(personIndex < maxPersonIndex)
+        {
+            for(int i = personIndex; i < maxPersonIndex; i++)
+            {
+                DeleteMarkManager.SendMessage(true, i);
+            }
+            maxPersonIndex = personIndex;
+        }
+
   
         yield return null;  
     }   
@@ -112,9 +166,28 @@ public class JsonMessageGet : MonoBehaviour
     {  
         if (client != null)  
         {  
+            Debug.Log("Close");
             client.Close();  
         }  
     }  
+
+    private List<float> HandleData(string jsonString)
+    {
+        List<float> dataList = new List<float>();  
+  
+        MatchCollection matches = Regex.Matches(jsonString, @"[-+]?\d*\.?\d+");  
+        
+        foreach (Match match in matches)  
+        {  
+            float value;  
+            if (float.TryParse(match.Value, out value))  
+            {  
+                dataList.Add(value);  
+            }  
+        }  
+
+        return dataList;
+    }
 
     [System.Serializable]  
     private class ListWrapper  

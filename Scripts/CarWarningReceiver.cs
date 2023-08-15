@@ -17,9 +17,10 @@ public class CarWarningReceiver : MonoBehaviour
         CarWarningManager.CarWarning -= ReceiveMassage;  
     } 
 
-    private void ReceiveMassage(Transform target)
+    private void ReceiveMassage(Transform target, int id)
     {
         GameObject follower = Instantiate(CarPrefab, this.gameObject.transform);
+        follower.name = "CarFollower"+id.ToString();
         follower.GetComponent<EyeMarkFollower>().SetTarge(target);
         target.gameObject.GetComponent<approach>().SetFollower(follower.transform.GetChild(1).gameObject);
     }

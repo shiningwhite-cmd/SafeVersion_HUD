@@ -16,6 +16,7 @@ public class WarningPosChanger : MonoBehaviour
     {   
     }  
   
+    // mark平滑运动效果
     private IEnumerator MoveToTarget()  
     {  
         while (elapsedTime < duration)  

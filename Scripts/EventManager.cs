@@ -68,18 +68,18 @@ public class JsonMarkManager : IEventManager
 
 public class DeleteMarkManager : IEventManager  
 {  
-    public delegate void DeleteMarkCreate(int id);  
+    public delegate void DeleteMarkCreate(bool iserson, int id);  
     public static event DeleteMarkCreate DeleteMark;  
   
     public void Update()  
     {  
     }  
   
-    public static void SendMessage(int id)  
+    public static void SendMessage(bool isPerson, int id)  
     {  
         if (DeleteMark != null)  
         {  
-            DeleteMark(id);  
+            DeleteMark(isPerson, id);  
             //Debug.Log(target);  
         }  
     }  
@@ -88,12 +88,14 @@ public class DeleteMarkManager : IEventManager
 [System.Serializable]  
 public class MarkMessage
 {  
+    public bool isPerson;
     public int MarkID;
     public Vector2 BboxBL;
     public Vector2 BboxTR;
 
-    public MarkMessage(int markID, Vector2 bboxBL, Vector2 bboxTR)
+    public MarkMessage(bool isperson, int markID, Vector2 bboxBL, Vector2 bboxTR)
     {
+        isPerson = isperson;
         MarkID = markID;
         BboxBL = bboxBL;
         BboxTR = bboxTR;

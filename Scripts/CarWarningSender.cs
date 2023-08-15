@@ -8,8 +8,8 @@ public class CarWarningSender : MonoBehaviour
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
-    void Start()
+    public void Send(int id)
     {
-        CarWarningManager.SendMessage(this.gameObject.transform);
+        CarWarningManager.SendMessage(this.gameObject.transform, id);
     }
 }

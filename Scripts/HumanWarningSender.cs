@@ -8,8 +8,8 @@ public class HumanWarningSender : MonoBehaviour
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
-    void Start()
+    public void Send(int id)
     {
-        HumanWarningManager.SendMessage(this.gameObject.transform);
+        HumanWarningManager.SendMessage(this.gameObject.transform, id);
     }
 }

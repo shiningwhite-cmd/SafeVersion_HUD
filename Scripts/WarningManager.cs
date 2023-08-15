@@ -26,7 +26,7 @@ public interface IWarningManager
   
 public class HumanWarningManager : IWarningManager  
 {  
-    public delegate void WarningCreate(Transform target);  
+    public delegate void WarningCreate(Transform target, int id);  
     public static event WarningCreate HumanWarning;  
   
     public void Update()  
@@ -34,11 +34,11 @@ public class HumanWarningManager : IWarningManager
         // 处理人类警告逻辑  
     }  
   
-    public static void SendMessage(Transform target)  
+    public static void SendMessage(Transform target, int id)  
     {  
         if (HumanWarning != null)  
         {  
-            HumanWarning(target);  
+            HumanWarning(target, id);  
             Debug.Log(target);  
         }  
     }  
@@ -46,7 +46,7 @@ public class HumanWarningManager : IWarningManager
   
 public class CarWarningManager : IWarningManager  
 {  
-    public delegate void WarningCreate(Transform target);  
+    public delegate void WarningCreate(Transform target, int id);  
     public static event WarningCreate CarWarning;  
   
     public void Update()  
@@ -54,12 +54,11 @@ public class CarWarningManager : IWarningManager
         // 处理汽车警告逻辑  
     }  
   
-    public static void SendMessage(Transform target)  
+    public static void SendMessage(Transform target, int id)  
     {  
         if (CarWarning != null)  
         {  
-            CarWarning(target);  
-            Debug.Log(target);  
+            CarWarning(target, id);   
         }  
     }  
 }  
