@@ -11,7 +11,7 @@ public class EyeMarkFollower : MonoBehaviour
     private float Radius = 94.0f;
     private Vector3 EyePos;
     private Vector3 eyePos;
-    private bool TestMode = false;
+    private bool TestMode = true;
   
     void Start()
     {

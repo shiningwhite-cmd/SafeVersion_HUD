@@ -1,0 +1,665 @@
+{
+    "Frame0001": {
+        "Time": "0.5s",
+        "Text": "In Frame 0001, there is one person detected on both the road and sidewalk. The person's distance to the dashcam is medium, but the angle information is not available. This situation poses a potential risk of collision. Immediate attention and caution are advised to ensure the safety of both the driver and the pedestrian.",
+        "Pedestrian": {
+            "0": [
+                "Medium",
+                [
+                    585.5271,
+                    640.12494,
+                    618.9758,
+                    749.5136
+                ]
+            ]
+        }
+    },
+    "Frame0002": {
+        "Time": "1.0s",
+        "Text": "The situation in Frame 0002 is critical, as all detected persons are on the road or sidewalk, and they are very close to the dashcam. Persons 0, 1, 3, 4, and 5 pose a high risk due to their positions, while Person 2 is considered a medium risk due to their slightly right position. Immediate attention and caution are required to avoid potential collisions.",
+        "Pedestrian": {
+            "0": [
+                "High",
+                [
+                    536.04724,
+                    614.61206,
+                    574.2269,
+                    747.48083
+                ]
+            ],
+            "1": [
+                "High",
+                [
+                    413.8218,
+                    635.9364,
+                    441.37613,
+                    699.8932
+                ]
+            ],
+            "2": [
+                "Medium",
+                [
+                    1176.4004,
+                    621.6575,
+                    1213.388,
+                    701.5736
+                ]
+            ],
+            "3": [
+                "High",
+                [
+                    364.74197,
+                    622.16345,
+                    388.77652,
+                    685.50574
+                ]
+            ],
+            "4": [
+                "High",
+                [
+                    605.46136,
+                    628.75256,
+                    624.90717,
+                    692.8849
+                ]
+            ],
+            "5": [
+                "High",
+                [
+                    1225.8188,
+                    616.3292,
+                    1248.4224,
+                    668.26135
+                ]
+            ]
+        }
+    },
+    "Frame0003": {
+        "Time": "1.5s",
+        "Text": "The situation in Frame 0003 is critical, as all detected persons are on the road or sidewalk, very close to the dashcam, and some are moving slightly towards the right. The high-risk evaluation for all persons is due to their positions, proximity to the dashcam, and potential intersection with the vehicle's path. Immediate and cautious action is necessary to avoid a potential collision.",
+        "Pedestrian": {
+            "0": [
+                "High",
+                [
+                    467.17172,
+                    621.8107,
+                    520.26874,
+                    776.566
+                ]
+            ],
+            "1": [
+                "High",
+                [
+                    1232.6066,
+                    622.7736,
+                    1294.0419,
+                    798.3527
+                ]
+            ],
+            "2": [
+                "High",
+                [
+                    374.52393,
+                    644.5955,
+                    408.27136,
+                    714.4832
+                ]
+            ],
+            "3": [
+                "High",
+                [
+                    328.9682,
+                    631.739,
+                    349.0251,
+                    698.6515
+                ]
+            ],
+            "4": [
+                "High",
+                [
+                    1200.6732,
+                    623.05676,
+                    1220.4039,
+                    676.52673
+                ]
+            ],
+            "5": [
+                "High",
+                [
+                    1117.4587,
+                    630.3574,
+                    1137.8823,
+                    678.2219
+                ]
+            ],
+            "6": [
+                "High",
+                [
+                    1135.5734,
+                    626.1428,
+                    1151.8671,
+                    665.73
+                ]
+            ]
+        }
+    },
+    "Frame0004": {
+        "Time": "2.0s",
+        "Text": "The situation in Frame 0004 is critical, as all detected persons are on the road or sidewalk, and they are in close proximity to the dashcam. Persons 3, 4, and 5 are particularly high-risk due to their very close distance to the dashcam. Immediate and cautious action is required to avoid potential collisions.",
+        "Pedestrian": {
+            "0": [
+                "Medium",
+                [
+                    419.43585,
+                    635.8201,
+                    518.20984,
+                    800.148
+                ]
+            ],
+            "1": [
+                "Medium",
+                [
+                    1307.2327,
+                    614.56537,
+                    1379.0864,
+                    825.00116
+                ]
+            ],
+            "2": [
+                "Medium",
+                [
+                    338.44067,
+                    644.5589,
+                    369.88043,
+                    720.19794
+                ]
+            ],
+            "3": [
+                "High",
+                [
+                    287.57736,
+                    639.5305,
+                    313.97806,
+                    706.202
+                ]
+            ],
+            "4": [
+                "High",
+                [
+                    1443.8298,
+                    614.4037,
+                    1467.2656,
+                    689.9414
+                ]
+            ],
+            "5": [
+                "High",
+                [
+                    1282.0944,
+                    615.2028,
+                    1300.3551,
+                    661.71063
+                ]
+            ]
+        }
+    },
+    "Frame0005": {
+        "Time": "2.5s",
+        "Text": "The situation in Frame 0005 is critical, as multiple persons are detected on the road and sidewalks, and they are in close proximity to the dashcam. The high-risk evaluation for all detected persons is due to their positions on the road or sidewalk and their close distances to the dashcam. Immediate and cautious action is necessary to avoid potential collisions.",
+        "Pedestrian": {
+            "0": [
+                "High",
+                [
+                    484.15942,
+                    621.9672,
+                    599.9055,
+                    829.08966
+                ]
+            ],
+            "1": [
+                "High",
+                [
+                    1325.4056,
+                    607.41974,
+                    1411.1053,
+                    855.2973
+                ]
+            ],
+            "2": [
+                "High",
+                [
+                    313.44177,
+                    648.83075,
+                    346.6853,
+                    729.63666
+                ]
+            ],
+            "3": [
+                "High",
+                [
+                    259.3648,
+                    641.4025,
+                    282.6355,
+                    714.8641
+                ]
+            ],
+            "5": [
+                "High",
+                [
+                    1622.6792,
+                    592.8659,
+                    1673.1824,
+                    744.1082
+                ]
+            ],
+            "6": [
+                "High",
+                [
+                    1461.3226,
+                    608.27673,
+                    1486.455,
+                    687.6188
+                ]
+            ],
+            "7": [
+                "High",
+                [
+                    1296.6068,
+                    612.5619,
+                    1313.9857,
+                    660.91956
+                ]
+            ],
+            "8": [
+                "High",
+                [
+                    1481.4775,
+                    616.861,
+                    1505.1729,
+                    687.66254
+                ]
+            ]
+        }
+    },
+    "Frame0006": {
+        "Time": "3.0s",
+        "Text": "The situation in Frame 0006 is critical, as all detected persons are on the road or sidewalk, close to the dashcam, and some are positioned to the right. Persons 0, 4, and 5 require extra attention due to their angle and proximity. Immediate and cautious action is recommended to avoid potential collisions.",
+        "Pedestrian": {
+            "0": [
+                "High",
+                [
+                    1272.6202,
+                    597.401,
+                    1390.923,
+                    888.9791
+                ]
+            ],
+            "1": [
+                "Medium",
+                [
+                    652.7349,
+                    596.8326,
+                    771.00006,
+                    844.07574
+                ]
+            ],
+            "2": [
+                "Medium",
+                [
+                    233.18594,
+                    635.13965,
+                    262.24606,
+                    719.3932
+                ]
+            ],
+            "3": [
+                "High",
+                [
+                    298.18283,
+                    647.4749,
+                    332.64798,
+                    728.3786
+                ]
+            ],
+            "4": [
+                "High",
+                [
+                    1465.3323,
+                    604.52234,
+                    1492.1633,
+                    684.2124
+                ]
+            ],
+            "5": [
+                "High",
+                [
+                    1489.629,
+                    610.33435,
+                    1513.9125,
+                    682.9391
+                ]
+            ]
+        }
+    },
+    "Frame0007": {
+        "Time": "3.5s",
+        "Text": "The situation in Frame 0007 is critical, as multiple persons are detected on the road and sidewalks. All detected persons are very close to the dashcam, indicating a crowded and potentially dangerous situation. Immediate and cautious action is required to avoid potential collisions.",
+        "Pedestrian": {
+            "0": [
+                "High",
+                [
+                    891.4602,
+                    575.90137,
+                    1029.8022,
+                    851.0353
+                ]
+            ],
+            "1": [
+                "High",
+                [
+                    1162.9866,
+                    595.95667,
+                    1283.9653,
+                    902.53516
+                ]
+            ],
+            "2": [
+                "High",
+                [
+                    217.58601,
+                    638.2469,
+                    242.46388,
+                    723.09064
+                ]
+            ],
+            "3": [
+                "High",
+                [
+                    296.8574,
+                    646.2139,
+                    328.46988,
+                    725.9661
+                ]
+            ],
+            "4": [
+                "High",
+                [
+                    1459.3237,
+                    603.91797,
+                    1487.7917,
+                    683.7998
+                ]
+            ],
+            "5": [
+                "High",
+                [
+                    1242.6863,
+                    611.5481,
+                    1263.852,
+                    665.7622
+                ]
+            ],
+            "6": [
+                "High",
+                [
+                    1487.1136,
+                    609.27405,
+                    1514.0248,
+                    681.286
+                ]
+            ],
+            "7": [
+                "High",
+                [
+                    1278.3779,
+                    614.1841,
+                    1310.9365,
+                    674.2446
+                ]
+            ],
+            "8": [
+                "High",
+                [
+                    1623.3191,
+                    590.3013,
+                    1681.2681,
+                    738.7197
+                ]
+            ]
+        }
+    },
+    "Frame0008": {
+        "Time": "4.0s",
+        "Text": "The situation in Frame 0008 is critical, as all detected persons are on the road or sidewalk, with some being very close to the dashcam. Persons 0, 1, 2, 4, and 5 pose a high risk due to their positions, distances, and angles. Person 3, although very close to the dashcam, has an unknown angle, making the risk evaluation high as well. Immediate and cautious action is necessary to avoid potential collisions.",
+        "Pedestrian": {
+            "0": [
+                "High",
+                [
+                    201.09984,
+                    639.7348,
+                    226.87727,
+                    727.352
+                ]
+            ],
+            "1": [
+                "High",
+                [
+                    1012.98566,
+                    591.926,
+                    1122.9005,
+                    917.33655
+                ]
+            ],
+            "2": [
+                "High",
+                [
+                    1118.2278,
+                    581.7319,
+                    1230.1187,
+                    854.3681
+                ]
+            ],
+            "3": [
+                "High",
+                [
+                    299.8234,
+                    648.5456,
+                    334.51602,
+                    727.836
+                ]
+            ],
+            "4": [
+                "High",
+                [
+                    1451.5308,
+                    606.61554,
+                    1476.0249,
+                    685.14935
+                ]
+            ],
+            "5": [
+                "High",
+                [
+                    1480.8726,
+                    611.088,
+                    1503.2737,
+                    682.2977
+                ]
+            ]
+        }
+    },
+    "Frame0009": {
+        "Time": "4.5s",
+        "Text": "The situation in Frame 0009 is critical, as multiple persons are detected on the road and sidewalks. The high-risk evaluation for Persons 0, 3, 4, 5, 6, 7, and 8 is due to their positions on the road and sidewalks, very close proximity to the dashcam, and their angles indicating potential collision paths. Person 1 and Person 2 are considered medium risk due to their positions and unknown angle for Person 1. Immediate attention and caution are required to avoid potential collisions.",
+        "Pedestrian": {
+            "0": [
+                "High",
+                [
+                    859.0519,
+                    592.9585,
+                    961.1029,
+                    918.6742
+                ]
+            ],
+            "1": [
+                "Medium",
+                [
+                    301.92197,
+                    650.3401,
+                    338.31357,
+                    727.9553
+                ]
+            ],
+            "2": [
+                "Medium",
+                [
+                    190.43436,
+                    655.22833,
+                    214.21616,
+                    732.29913
+                ]
+            ],
+            "3": [
+                "High",
+                [
+                    1318.7064,
+                    577.29047,
+                    1411.1385,
+                    860.61346
+                ]
+            ],
+            "4": [
+                "High",
+                [
+                    1597.8575,
+                    598.55505,
+                    1652.6593,
+                    736.2351
+                ]
+            ],
+            "5": [
+                "High",
+                [
+                    1748.0236,
+                    609.2006,
+                    1794.4921,
+                    735.3776
+                ]
+            ],
+            "6": [
+                "High",
+                [
+                    1218.0986,
+                    614.2421,
+                    1240.7849,
+                    669.4643
+                ]
+            ],
+            "7": [
+                "High",
+                [
+                    1659.7201,
+                    606.8239,
+                    1700.0782,
+                    732.6972
+                ]
+            ],
+            "8": [
+                "High",
+                [
+                    1442.638,
+                    606.149,
+                    1468.7214,
+                    683.2447
+                ]
+            ]
+        }
+    },
+    "Frame0010": {
+        "Time": "5.0s",
+        "Text": "The situation in Frame 0010 is critical, as all detected persons are on the road or sidewalks, and they are very close to the dashcam. Persons 3 to 8, in particular, are at a high risk due to their close proximity to the dashcam and their positions to the right side. Immediate and cautious action is necessary to avoid potential collisions.",
+        "Pedestrian": {
+            "0": [
+                "Medium",
+                [
+                    171.08287,
+                    649.92395,
+                    201.91466,
+                    740.60535
+                ]
+            ],
+            "1": [
+                "Medium",
+                [
+                    702.6079,
+                    597.44885,
+                    800.2898,
+                    934.9923
+                ]
+            ],
+            "2": [
+                "Medium",
+                [
+                    310.09833,
+                    652.6451,
+                    341.29816,
+                    731.18744
+                ]
+            ],
+            "3": [
+                "High",
+                [
+                    1448.9976,
+                    582.8158,
+                    1596.6218,
+                    870.0475
+                ]
+            ],
+            "4": [
+                "High",
+                [
+                    1309.5238,
+                    615.8626,
+                    1338.3263,
+                    682.5524
+                ]
+            ],
+            "5": [
+                "High",
+                [
+                    1598.8737,
+                    605.59106,
+                    1643.9484,
+                    736.2313
+                ]
+            ],
+            "6": [
+                "High",
+                [
+                    783.6711,
+                    628.92053,
+                    826.7459,
+                    718.64075
+                ]
+            ],
+            "7": [
+                "High",
+                [
+                    1649.4984,
+                    613.3463,
+                    1686.3837,
+                    732.4912
+                ]
+            ],
+            "8": [
+                "High",
+                [
+                    1435.1711,
+                    609.983,
+                    1461.1096,
+                    685.5422
+                ]
+            ]
+        }
+    }
+}

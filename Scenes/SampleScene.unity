@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 580122327}
   - component: {fileID: 580122328}
   - component: {fileID: 580122329}
+  - component: {fileID: 580122331}
   - component: {fileID: 580122330}
   m_Layer: 0
   m_Name: EventSystem
@@ -288,7 +289,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 580122319}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fc3bf57052ac4746830165c8b69edc3, type: 3}
   m_Name: 
@@ -337,13 +338,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 580122319}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 488d4b0053240b742957d5d2fea56970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pythonHost: localhost
-  pythonPort: 1111
+  pythonPort: 11111
+  screenWidth: 0
+  screenHeight: 0
+  maxCarIndex: 0
+  maxPersonIndex: 0
   ratio: 0.04
   resolution: {x: 1280, y: 720}
 --- !u!114 &580122330
@@ -361,6 +366,20 @@ MonoBehaviour:
   CarMarkPrefab: {fileID: 8824419705631099412, guid: b08b9dee7a052e24bbf4a8540ae34836, type: 3}
   HumanMarkPrefab: {fileID: 3189050310798385122, guid: c225cbb70f682d94481c624c0fdb77a6, type: 3}
   MarkPanel: {fileID: 1673029532}
+--- !u!114 &580122331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580122319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 890eade38ac8d8f4c8840eeea1f8ecf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ratio: 0.04
+  resolution: {x: 1280, y: 720}
 --- !u!1 &663054551
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,7 +919,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1202140521}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 9339db90464be1844bb2cf9ea2d227c5, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 5a45b8d0fb8624541b5cb8c3fc82925b, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}

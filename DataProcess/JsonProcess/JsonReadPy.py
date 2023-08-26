@@ -7,9 +7,18 @@ import threading
 current_directory = os.getcwd()  
 print("当前工作目录：", current_directory)
 
-# 读取JSON文件  
-with open(r'Assets/DataProcess/JsonProcess/JsonFiles/Bbox_Video_fe0a.json') as file:  
-    data = json.load(file)  
+# 读取JSON文件  
+def open_json_file(file_path):
+     with open(file_path) as file: 
+             data = json.load(file) 
+             return data 
+# 文件名  在这里改变视频名
+file_name = "easy_1" 
+
+# 构建文件路径  
+file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/b4542860-0b880bb4.json" 
+# 打开JSON文件  
+data = open_json_file(file_path) 
   
 
 # 获取JSON数据的长度  
@@ -20,7 +29,7 @@ print("JSON文件长度：", json_length)
  
   
 HOST = 'localhost'  # 主机名  
-PORT = 1111  # 端口号  
+PORT = 11111  # 端口号  
   
 # 创建一个TCP socket  
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
@@ -35,70 +44,54 @@ print('连接成功:', address)
   
 event = threading.Event() 
 
-GetMessages = False
 
-for i in range(0, json_length):
-    while(GetMessages == False):
-        unitydata = client_socket.recv(1024) 
-        if(unitydata != None):
-            GetMessages = bool(unitydata.decode())
+value_str = ""
+value_str = value_str + json.dumps(json_length) + "|*|"
 
-    if(GetMessages): 
+for i in range(0, json_length-1):
         
-        if(i+1<10):
-            index = '000'+str(i+1)
-        else:
-            index = '00'+str(i+1)
+    if(i+1<10):
+        index = '000'+str(i+1)
+    elif(i+1<100):
+        index = '00'+str(i+1)
+    elif(i+1<1000):
+         index = '0'+str(i+1)
+    else:
+         index = str(i+1)
 
-        print(index)  
+    # print(index)  
 
-        # 访问JSON数据  
-        bbox_data = data[index]['person']
-        pos_data = data[index]['car']  
+    # 访问JSON数据  
+    bbox_data = data[index]['person']
+    pos_data = data[index]['car']  
 
-        value_str = ""
-        # 打印bbox数据  
-        if(pos_data != {}):
-            # print(bbox_data)
-            for key, value in pos_data.items():  
-                print(f'Key: {key}')  
-                print(f'Value: {value}') 
-                # string_list = value[0]
-                # number_list = value[1]
-                
-                # print("String List:", string_list)  
-                # print("Number List:", number_list) 
-                print('---') 
 
-                if value is not None:
-                    value_str = value_str + json.dumps(value) + "|#|"
-        else:
-            value_str = value_str + json.dumps(None) + "|#|"
+    if(bbox_data != {}):
+        # print(bbox_data)
+        for key, value in bbox_data.items():  
+            # print(f'Key: {key}')  
+            # print(f'Value: {value}') 
+            # print('---') 
+
+            if value is not None:
+                value_str = value_str + "{\"riskID\":" + key + ",\"list\":" + json.dumps(value) + "}" + "|#|"
+    else:
+        value_str = value_str + json.dumps(None) + "|#|"
+
+    # 发送数据给Unity  
+    value_str = value_str + "|*|"
         
-        value_str = value_str + "|*|"
 
-        if(bbox_data != {}):
-            # print(bbox_data)
-            for key, value in bbox_data.items():  
-                print(f'Key: {key}')  
-                print(f'Value: {value}') 
-                # string_list = value[0]
-                # number_list = value[1]
-                
-                # print("String List:", string_list)  u
-                # print("Number List:", number_list) 
-                print('---') 
+chunk_size = 1024
+chunks = [value_str[i:i+chunk_size] for i in range(0, len(value_str), chunk_size)]
 
-                if value is not None:
-                    value_str = value_str + json.dumps(value) + "|#|"
-        else:
-            value_str = value_str + json.dumps(None) + "|#|"
+# 逐个发送块
+for chunk in chunks:
+    # print("xxxxx")
+    # print(chunk)
+    client_socket.send(chunk.encode())
 
-        # 发送数据给Unity  
-        client_socket.send(value_str.encode()) 
-        GetMessages = False 
-
-  
+    
 # 关闭连接  
 client_socket.close()  
 server_socket.close()  

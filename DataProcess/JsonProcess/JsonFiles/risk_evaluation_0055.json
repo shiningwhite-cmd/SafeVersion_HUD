@@ -1,0 +1,274 @@
+{
+    "Frame0001": {
+        "Time": "0.5s",
+        "Text": "The situation in Frame 0001 indicates a potential risk due to Person 0 being on the road and sidewalks. Immediate attention and caution are advised to avoid a potential collision.",
+        "Pedestrian": {
+            "0": [
+                "Medium",
+                [
+                    419.99936,
+                    626.6084,
+                    449.85208,
+                    697.1022
+                ]
+            ]
+        }
+    },
+    "Frame0002": {
+        "Time": "1.0s",
+        "Text": "The situation in Frame 0002 indicates a potential risk due to Person 0 being on the road and sidewalk, as well as their close proximity to the dashcam. Immediate attention and caution are advised to avoid a potential collision.",
+        "Pedestrian": {
+            "0": [
+                "High",
+                [
+                    414.67587,
+                    617.93945,
+                    436.02493,
+                    691.64136
+                ]
+            ]
+        }
+    },
+    "Frame0003": {
+        "Time": "1.5s",
+        "Text": "The situation in Frame 0003 shows the presence of a car on the road, which adds to the potential risks on the road. Car 0 is considered a medium risk due to its position on the road and close proximity to the dashcam. Caution should be exercised to ensure safe driving and avoid any potential collisions.",
+        "Pedestrian": {}
+    },
+    "Frame0004": {
+        "Time": "2.0s",
+        "Text": "The situation in Frame 0004 indicates a potential risk due to Person 0 being on the road and sidewalk, close to the dashcam. However, since the angle of Person 0 is unknown, the risk evaluation is considered medium. Caution should be exercised to ensure the safety of both the driver and the pedestrian.",
+        "Pedestrian": {
+            "0": [
+                "Medium",
+                [
+                    396.18976,
+                    650.97345,
+                    422.22913,
+                    691.5142
+                ]
+            ]
+        }
+    },
+    "Frame0005": {
+        "Time": "2.5s",
+        "Text": "The situation in Frame 0005 indicates a potential risk due to the presence of Person 0 on the road and sidewalks. The high-risk evaluation is based on their position, close proximity to the dashcam, and the unknown angle. Additionally, the presence of Car 1 in the vicinity raises concerns for pedestrian safety. Immediate attention and caution are advised to prevent a potential collision.",
+        "Pedestrian": {
+            "0": [
+                "High",
+                [
+                    391.15555,
+                    616.20074,
+                    424.15933,
+                    696.42377
+                ]
+            ]
+        }
+    },
+    "Frame0006": {
+        "Time": "3.0s",
+        "Text": "The situation in Frame 0006 indicates a potential risk due to the presence of Person 0 on the road and sidewalk. The medium-risk evaluation is based on their position, close proximity to the dashcam, and the unknown angle. Caution should be exercised to avoid a potential collision.",
+        "Pedestrian": {
+            "0": [
+                "Medium",
+                [
+                    429.7862,
+                    629.93726,
+                    458.11133,
+                    709.67114
+                ]
+            ]
+        }
+    },
+    "Frame0007": {
+        "Time": "3.5s",
+        "Text": "The situation in Frame 0007 indicates a potential risk due to the presence of Person 0 on the road and sidewalk, as well as their close proximity to the dashcam. However, without angle information, it is difficult to assess the exact risk level. The presence of cars in the left-down region does not pose an immediate risk based on the provided information. Caution should be exercised to ensure the safety of all individuals involved.",
+        "Pedestrian": {
+            "0": [
+                "Medium",
+                [
+                    534.9534,
+                    641.29834,
+                    558.38934,
+                    722.4391
+                ]
+            ]
+        }
+    },
+    "Frame0008": {
+        "Time": "4.0s",
+        "Text": "The situation in Frame 0008 indicates a medium level of risk. Persons 0, 1, and 2 are on the road or sidewalk, close to the dashcam, and may pose a potential risk of collision. Immediate attention and caution are advised to ensure the safety of both the pedestrians and the vehicle.",
+        "Pedestrian": {
+            "0": [
+                "Medium",
+                [
+                    704.6992,
+                    644.3442,
+                    730.74,
+                    730.55585
+                ]
+            ],
+            "1": [
+                "Medium",
+                [
+                    50.12669,
+                    633.0325,
+                    78.009834,
+                    712.24634
+                ]
+            ],
+            "2": [
+                "Medium",
+                [
+                    1353.0698,
+                    629.83093,
+                    1366.0693,
+                    655.73596
+                ]
+            ]
+        }
+    },
+    "Frame0009": {
+        "Time": "4.5s",
+        "Text": "The situation in Frame 0009 is critical due to the presence of multiple persons on the road and sidewalk. Person 1 and Person 2 are very close to the dashcam, indicating a high risk of collision. Person 0, although not as close, is still considered a medium risk due to their position on the road and sidewalk. Immediate attention and caution are advised to avoid potential accidents.",
+        "Pedestrian": {
+            "0": [
+                "Medium",
+                [
+                    921.01483,
+                    634.52325,
+                    949.0263,
+                    729.9025
+                ]
+            ],
+            "1": [
+                "High",
+                [
+                    244.2837,
+                    650.67303,
+                    267.58572,
+                    721.50385
+                ]
+            ],
+            "2": [
+                "High",
+                [
+                    1599.3611,
+                    602.2798,
+                    1613.2656,
+                    632.2106
+                ]
+            ]
+        }
+    },
+    "Frame0010": {
+        "Time": "5.0s",
+        "Text": "The situation in Frame 0010 is critical due to the presence of multiple persons on different roads, close proximity to the dashcam, and potential interaction with cars. Persons 0, 1, and 2 pose a high risk, while Car 3 and Car 4 pose a medium risk. Immediate attention and caution are necessary to prevent potential collisions or accidents.",
+        "Pedestrian": {
+            "0": [
+                "High",
+                [
+                    1132.967,
+                    622.22345,
+                    1174.2251,
+                    736.25653
+                ]
+            ],
+            "1": [
+                "High",
+                [
+                    381.62482,
+                    650.12335,
+                    408.9972,
+                    729.0185
+                ]
+            ],
+            "2": [
+                "High",
+                [
+                    1841.4952,
+                    581.69293,
+                    1853.8412,
+                    614.415
+                ]
+            ]
+        }
+    },
+    "Frame0011": {
+        "Time": "5.5s",
+        "Text": "The situation in Frame 0011 is critical as both Person 0 and Person 1 are detected on multiple roads and the sidewalk. They are also very close to the dashcam, indicating a potential risk of collision. Immediate attention and caution are required to avoid any accidents.",
+        "Pedestrian": {
+            "0": [
+                "High",
+                [
+                    1340.6547,
+                    605.21295,
+                    1398.9042,
+                    756.1014
+                ]
+            ],
+            "1": [
+                "High",
+                [
+                    438.5458,
+                    648.4663,
+                    464.88058,
+                    736.53235
+                ]
+            ]
+        }
+    },
+    "Frame0012": {
+        "Time": "6.0s",
+        "Text": "In Frame 0012, there are two potential risks involving pedestrians. Person 0 is on both road 0 and road 1, positioned very far to the right, which poses a medium risk of collision with vehicles on either road. Person 1 is not on any road but is located in the left-down region, indicating a medium risk of crossing the road unexpectedly. Car 2, located at right-down, poses a low risk of collision with pedestrians. Caution should be exercised to ensure the safety of both pedestrians and vehicles.",
+        "Pedestrian": {
+            "0": [
+                "Medium",
+                [
+                    1587.9072,
+                    560.1995,
+                    1676.9683,
+                    787.9797
+                ]
+            ],
+            "1": [
+                "Medium",
+                [
+                    407.257,
+                    649.58545,
+                    440.83255,
+                    756.9584
+                ]
+            ]
+        }
+    },
+    "Frame0013": {
+        "Time": "6.5s",
+        "Text": "The situation in Frame 0013 is potentially risky due to the presence of Person 0 on multiple surfaces (roads and sidewalks) and their close proximity to the dashcam. Immediate attention and caution are advised to avoid any potential collision.",
+        "Pedestrian": {
+            "0": [
+                "High",
+                [
+                    281.73822,
+                    637.55994,
+                    331.77008,
+                    778.99817
+                ]
+            ]
+        }
+    },
+    "Frame0014": {
+        "Time": "7.0s",
+        "Text": "The situation in Frame 0014 is potentially risky due to the presence of Person 0. They are detected on multiple roads and sidewalks, indicating potential unpredictable movement patterns. Additionally, their close proximity to the dashcam and position far to the left raise concerns about potential collision risks. Immediate attention and caution are advised to ensure the safety of both the driver and Person 0.",
+        "Pedestrian": {
+            "0": [
+                "High",
+                [
+                    0.22182655,
+                    582.88275,
+                    57.043327,
+                    812.61395
+                ]
+            ]
+        }
+    }
+}
