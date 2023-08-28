@@ -16,7 +16,7 @@ def open_json_file(file_path):
 file_name = "easy_1" 
 
 # 构建文件路径  
-file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/b4542860-0b880bb4.json" 
+file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/bbox_car_b4542860-0b880bb4.json" 
 # 打开JSON文件  
 data = open_json_file(file_path) 
   
@@ -48,6 +48,7 @@ event = threading.Event()
 value_str = ""
 value_str = value_str + json.dumps(json_length) + "|*|"
 
+
 for i in range(0, json_length-1):
         
     if(i+1<10):
@@ -63,7 +64,6 @@ for i in range(0, json_length-1):
 
     # 访问JSON数据  
     bbox_data = data[index]['person']
-    pos_data = data[index]['car']  
 
 
     if(bbox_data != {}):
@@ -75,6 +75,38 @@ for i in range(0, json_length-1):
 
             if value is not None:
                 value_str = value_str + "{\"riskID\":" + key + ",\"list\":" + json.dumps(value) + "}" + "|#|"
+    else:
+        value_str = value_str + json.dumps(None) + "|#|"
+
+    # 发送数据给Unity  
+    value_str = value_str + "|*|"
+
+value_str = value_str + "|$|"
+
+for i in range(0, json_length-1):
+        
+    if(i+1<10):
+        index = '000'+str(i+1)
+    elif(i+1<100):
+        index = '00'+str(i+1)
+    elif(i+1<1000):
+         index = '0'+str(i+1)
+    else:
+         index = str(i+1)
+
+    # print(index)  
+    cars_data = [data[index]['car'], data[index]['motorcycle'], data[index]['bus'], data[index]['truck'] ]
+
+    if(cars_data != []):
+        for car_data in cars_data:
+        # print(bbox_data)
+            for key, value in car_data.items():  
+                # print(f'Key: {key}')  
+                # print(f'Value: {value}') 
+                # print('---') 
+
+                if value is not None:
+                    value_str = value_str + "{\"riskID\":" + key + ",\"list\":" + json.dumps(value) + "}" + "|#|"
     else:
         value_str = value_str + json.dumps(None) + "|#|"
 

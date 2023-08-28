@@ -6,10 +6,10 @@ using UnityEngine.Video;
 
 public class VideoPlayControler : MonoBehaviour
 {
-    public float videoWaitforSecond = 0.2f;
+    public float videoWaitforSecond;
     public VideoPlayer videoPlayer;
     // Start is called before the first frame update
-    void Start()
+    public void PlayVideo()
     {
         StartCoroutine(Play());
     }

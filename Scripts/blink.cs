@@ -17,22 +17,43 @@ public class blink : MonoBehaviour
     private Animator checkBoxAnima;
     private Animator underLineAnima;
     private Animator followAnima;
+    private Vector3 EyePos;
+    private Vector3 imagePosition;
   
     private void Start()  
     {  
-        // checkBox = this.gameobject.FindGameo
         isMouseOver = false;   
         checkBoxAnima = checkBox.GetComponent<Animator>();
         underLineAnima = underLine.GetComponent<Animator>();
         if(follow != null)
             followAnima = follow.GetComponent<Animator>();
     }  
+
+    
+    private void OnEnable()  
+    {  
+        EyeTrackManager.EyeTrack += ReceiveMassage;  
+    }  
+  
+    private void OnDisable()  
+    {  
+        EyeTrackManager.EyeTrack -= ReceiveMassage;  
+    } 
   
     private void Update()  
     {  
-        Vector3 mousePosition = Input.mousePosition;  
-        Vector3 imagePosition = Camera.main.WorldToScreenPoint(checkBox.transform.position);  
-        float distance = Vector3.Distance(mousePosition, imagePosition);  
+        // if(EyePos == null)
+        //     EyePos = Vector3.zero;
+        Vector3 eyeTrackPos = Vector3.zero;
+        if(TestModeManager.TestMode)
+            eyeTrackPos = Input.mousePosition;
+        else
+        {
+            if(EyePos != null)
+                eyeTrackPos = EyePos;
+        }
+        imagePosition = this.gameObject.transform.position;  
+        float distance = Vector3.Distance(eyeTrackPos, imagePosition);  
   
         if (distance < fadeThreshold)  
         {     
@@ -44,11 +65,6 @@ public class blink : MonoBehaviour
             underLineAnima.SetBool("isAppearing", true);
 
         }  
-        // else if (distance > scaleThreshold && !isScaling && image.transform.localScale.x < originalScale.x * maxScaleFactor)  
-        // {  
-        //     // 开始放大协程  
-        //     StartCoroutine(ScaleUpCoroutine());  
-        // }  
     } 
 
     private IEnumerator PauseUpdateCoroutine(float fadeDuration)  
@@ -61,4 +77,9 @@ public class blink : MonoBehaviour
         follow = follower;
         followAnima = follow.GetComponent<Animator>();
     } 
+
+    private void ReceiveMassage(Vector2 Pos)
+    {
+        EyePos = new Vector3(Pos.x, Pos.y, 0);
+    }
 }  

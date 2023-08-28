@@ -14,6 +14,7 @@ public class JsonSendCS : MonoBehaviour
     TcpClient client;  
     NetworkStream stream;  
     StringBuilder receivedData;
+    public VideoPlayControler videoPlayControler;
 
     // 获取屏幕宽度  
     int screenWidth = Screen.width;  
@@ -21,22 +22,29 @@ public class JsonSendCS : MonoBehaviour
     // 获取屏幕高度  
     int screenHeight = Screen.height;
 
-    List<int> LastID = new List<int>(); 
-    List<int> ThisID = new List<int>();
+    List<int> PersonLastID = new List<int>(); 
+    List<int> PersonThisID = new List<int>();
+    
+    List<int> CarLastID = new List<int>(); 
+    List<int> CarThisID = new List<int>();
 
     string collectedData;
 
-    List<FrameInfo> frameInfo = new List<FrameInfo>();
+    List<FrameInfo> personFrameInfo = new List<FrameInfo>();
+    List<FrameInfo> carFrameInfo = new List<FrameInfo>();
 
     private int frameIndex = 0;
-    public float ratio = 0.03333f;
+    float ratio = 0.033f;
     public Vector2 resolution = new Vector2(1280.0f, 720.0f);
+    string[] dataStrings;
 
     void Start()  
     {  
         ReceiveFromPython();  
 
         processData();
+
+        videoPlayControler.PlayVideo();
 
         StartCoroutine(sendMessage());
     }  
@@ -77,30 +85,30 @@ public class JsonSendCS : MonoBehaviour
   
         // 汇集的数据  
         collectedData = receivedData.ToString();  
+        dataStrings = collectedData.Split(new string[] { "|$|" }, StringSplitOptions.None);
+        
         // Debug.Log("Received Data: " + collectedData); 
     } 
 
 
     private void processData()
     {
-        string[] personStrings = collectedData.Split(new string[] { "|*|" }, StringSplitOptions.None);
+        // 处理人
+        string[] personStrings = dataStrings[0].Split(new string[] { "|*|" }, StringSplitOptions.None);
         
         
         for(int i = 1; i < int.Parse(personStrings[0]); i++)
         {  
             if(personStrings[i] == "")
             {
-                Debug.Log("Personbreak");
                 break;
             }
 
             if(personStrings[i] == "null")
             {
-                Debug.Log("PersonNone");
                 break;
             }
 
-            Debug.Log("personStrings[i]="+personStrings[i]);
             FrameInfo singleFrame = new FrameInfo();
             singleFrame.riskList = new List<ListWrapper>();
             string[] riskStringsinFrame = personStrings[i].Split(new string[] { "|#|" }, StringSplitOptions.None);
@@ -126,7 +134,53 @@ public class JsonSendCS : MonoBehaviour
 
             }
 
-            frameInfo.Add(singleFrame);
+            personFrameInfo.Add(singleFrame);
+        }
+
+
+        // 处理车
+        string[] carStrings = dataStrings[1].Split(new string[] { "|*|" }, StringSplitOptions.None);
+
+        
+        
+        for(int i = 0; i < int.Parse(personStrings[0])-1; i++)
+        {  
+            if(carStrings[i] == "")
+            {
+                break;
+            }
+
+            if(carStrings[i] == "null")
+            {
+                break;
+            }
+
+            FrameInfo singleFrame = new FrameInfo();
+            singleFrame.riskList = new List<ListWrapper>();
+            string[] riskStringsinFrame = carStrings[i].Split(new string[] { "|#|" }, StringSplitOptions.None);
+            Debug.Log(riskStringsinFrame);
+
+            foreach(string riskStringinFrame in riskStringsinFrame)
+            {
+                if(riskStringinFrame == "")
+                {
+                    break;
+                }
+
+                if(riskStringinFrame == "null")
+                {
+                    break;
+                }
+
+                ListWrapper Info = new ListWrapper();
+                Info = JsonUtility.FromJson<ListWrapper>(riskStringinFrame);
+                
+
+                singleFrame.riskList.Add(Info);
+
+            }
+
+            carFrameInfo.Add(singleFrame);
         }
 
     }  
@@ -135,7 +189,7 @@ public class JsonSendCS : MonoBehaviour
     {
         while(true)
         {
-            foreach(ListWrapper risk in frameInfo[frameIndex].riskList)
+            foreach(ListWrapper risk in personFrameInfo[frameIndex].riskList)
             {
                 if(risk == null)
                     continue;
@@ -145,26 +199,64 @@ public class JsonSendCS : MonoBehaviour
                     screenHeight - (risk.list[3]/resolution.y)*screenHeight);
                 int ID = risk.riskID;
                 JsonMarkManager.SendMessage(new MarkMessage(true, ID, BboxBL, BboxTR));
-                ThisID.Add(ID);
+                PersonThisID.Add(ID);
             }
 
-            if(LastID != null && ThisID != null)
+            if(PersonLastID != null && PersonThisID != null)
             {
-                foreach(int id in LastID)
+                foreach(int id in PersonLastID)
                 {
-                    if(!ThisID.Contains(id))
+                    if(!PersonThisID.Contains(id))
                     {
                         DeleteMarkManager.SendMessage(true, id);
                     }
                 }
             }
 
-            LastID.Clear();
-            LastID.AddRange(ThisID);
-            ThisID.Clear();
+            PersonLastID.Clear();
+            PersonLastID.AddRange(PersonThisID);
+            PersonThisID.Clear();
+            
+
+            foreach(ListWrapper risk in carFrameInfo[frameIndex].riskList)
+            {
+                if(risk == null)
+                    continue;
+                Vector2 BboxBL = new Vector2((risk.list[0]/resolution.x)*screenWidth, 
+                    screenHeight - (risk.list[1]/resolution.y)*screenHeight);
+                Vector2 BboxTR = new Vector2((risk.list[2]/resolution.x)*screenWidth, 
+                    screenHeight - (risk.list[3]/resolution.y)*screenHeight);
+                int ID = risk.riskID;
+                JsonMarkManager.SendMessage(new MarkMessage(false, ID, BboxBL, BboxTR));
+                CarThisID.Add(ID);
+            }
+
+
+            if(CarLastID != null && CarThisID != null)
+            {
+                foreach(int id in CarLastID)
+                {
+                    if(!CarThisID.Contains(id))
+                    {
+                        DeleteMarkManager.SendMessage(false, id);
+                    }
+                }
+            }
+
+            CarLastID.Clear();
+            CarLastID.AddRange(CarThisID);
+            CarThisID.Clear();
             
             frameIndex ++;
             yield return new WaitForSeconds(ratio);
+
+            Debug.Log("This Frame:"+frameIndex);
+            
+            if(frameIndex % 3 == 0)
+            {
+                // yield return new WaitForSeconds(0.003f);
+            }
+            
         }
     }
 

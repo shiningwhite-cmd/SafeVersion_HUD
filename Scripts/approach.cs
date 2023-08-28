@@ -41,11 +41,18 @@ public class approach : MonoBehaviour
   
     private void Update()  
     {  
-        if(EyePos == null)
-            EyePos = Vector3.zero;
+        // if(EyePos == null)
+        //     EyePos = Vector3.zero;
+        Vector3 eyeTrackPos = Vector3.zero;
+        if(TestModeManager.TestMode)
+            eyeTrackPos = Input.mousePosition;
+        else
+        {
+            if(EyePos != null)
+                eyeTrackPos = EyePos;
+        }
         imagePosition = this.gameObject.transform.position;  
-        float distance = Vector3.Distance(EyePos, imagePosition);  
-        // Debug.Log(imagePosition);
+        float distance = Vector3.Distance(eyeTrackPos, imagePosition);  
   
         if (distance < scaleThreshold)  
         {     
@@ -54,11 +61,6 @@ public class approach : MonoBehaviour
                 followAnima.SetBool("isFading", true);
             anima.SetBool("isAnimaPlay", true);
         }  
-        // else if (distance > scaleThreshold && !isScaling && image.transform.localScale.x < originalScale.x * maxScaleFactor)  
-        // {  
-        //     // 开始放大协程  
-        //     StartCoroutine(ScaleUpCoroutine());  
-        // }  
     }
     
     public void SetFollower(GameObject follower)

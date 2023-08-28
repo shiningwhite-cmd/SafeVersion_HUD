@@ -16,7 +16,7 @@ def open_json_file(file_path):
 file_name = "easy_1" 
 
 # 构建文件路径  
-file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/b4542860-0b880bb4.json" 
+file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/b1c9c847-3bda4659.json" 
 # 打开JSON文件  
 data = open_json_file(file_path) 
 emptyFrame = {"person":{},
