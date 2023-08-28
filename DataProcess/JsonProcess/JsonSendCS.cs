@@ -200,8 +200,12 @@ public class JsonSendCS : MonoBehaviour
                     Vector2 BboxTR = new Vector2((risk.list[2]/resolution.x)*screenWidth, 
                         screenHeight - (risk.list[3]/resolution.y)*screenHeight);
                     int ID = risk.riskID;
-                    JsonMarkManager.SendMessage(new MarkMessage(true, ID, BboxBL, BboxTR));
-                    PersonThisID.Add(ID);
+                    Vector2 BboxCenter = (BboxBL + BboxTR)/2;
+                    if(BboxCenter.y > screenHeight / 4 && BboxCenter.y < screenHeight * 3 / 4)
+                    {
+                        JsonMarkManager.SendMessage(new MarkMessage(true, ID, BboxBL, BboxTR));
+                        PersonThisID.Add(ID);
+                    }
                 }
 
                 if(PersonLastID != null && PersonThisID != null)
@@ -231,8 +235,12 @@ public class JsonSendCS : MonoBehaviour
                     Vector2 BboxTR = new Vector2((risk.list[2]/resolution.x)*screenWidth, 
                         screenHeight - (risk.list[3]/resolution.y)*screenHeight);
                     int ID = risk.riskID;
-                    JsonMarkManager.SendMessage(new MarkMessage(false, ID, BboxBL, BboxTR));
-                    CarThisID.Add(ID);
+                    Vector2 BboxCenter = (BboxBL + BboxTR)/2;
+                    if(BboxCenter.y > screenHeight / 4 && BboxCenter.y < screenHeight * 3 / 4)
+                    {
+                        JsonMarkManager.SendMessage(new MarkMessage(false, ID, BboxBL, BboxTR));
+                        CarThisID.Add(ID);
+                    }
                 }
 
 
