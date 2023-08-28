@@ -16,7 +16,7 @@ def open_json_file(file_path):
 file_name = "easy_1" 
 
 # 构建文件路径  
-file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/bbox_car_b4542860-0b880bb4.json" 
+file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/b4542860-0b880bb4.json" 
 # 打开JSON文件  
 data = open_json_file(file_path) 
   
@@ -95,7 +95,7 @@ for i in range(0, json_length-1):
          index = str(i+1)
 
     # print(index)  
-    cars_data = [data[index]['car'], data[index]['motorcycle'], data[index]['bus'], data[index]['truck'] ]
+    cars_data = [data[index]['car']]##, data[index]['motorcycle'], data[index]['bus'], data[index]['truck'] ]
 
     if(cars_data != []):
         for car_data in cars_data:

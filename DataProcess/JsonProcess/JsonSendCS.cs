@@ -143,7 +143,7 @@ public class JsonSendCS : MonoBehaviour
 
         
         
-        for(int i = 0; i < int.Parse(personStrings[0])-1; i++)
+        for(int i = 0; i < int.Parse(personStrings[0]); i++)
         {  
             if(carStrings[i] == "")
             {
@@ -189,63 +189,68 @@ public class JsonSendCS : MonoBehaviour
     {
         while(true)
         {
-            foreach(ListWrapper risk in personFrameInfo[frameIndex].riskList)
+            if(frameIndex < personFrameInfo.Count)
             {
-                if(risk == null)
-                    continue;
-                Vector2 BboxBL = new Vector2((risk.list[0]/resolution.x)*screenWidth, 
-                    screenHeight - (risk.list[1]/resolution.y)*screenHeight);
-                Vector2 BboxTR = new Vector2((risk.list[2]/resolution.x)*screenWidth, 
-                    screenHeight - (risk.list[3]/resolution.y)*screenHeight);
-                int ID = risk.riskID;
-                JsonMarkManager.SendMessage(new MarkMessage(true, ID, BboxBL, BboxTR));
-                PersonThisID.Add(ID);
-            }
-
-            if(PersonLastID != null && PersonThisID != null)
-            {
-                foreach(int id in PersonLastID)
+                foreach(ListWrapper risk in personFrameInfo[frameIndex].riskList)
                 {
-                    if(!PersonThisID.Contains(id))
+                    if(risk == null)
+                        continue;
+                    Vector2 BboxBL = new Vector2((risk.list[0]/resolution.x)*screenWidth, 
+                        screenHeight - (risk.list[1]/resolution.y)*screenHeight);
+                    Vector2 BboxTR = new Vector2((risk.list[2]/resolution.x)*screenWidth, 
+                        screenHeight - (risk.list[3]/resolution.y)*screenHeight);
+                    int ID = risk.riskID;
+                    JsonMarkManager.SendMessage(new MarkMessage(true, ID, BboxBL, BboxTR));
+                    PersonThisID.Add(ID);
+                }
+
+                if(PersonLastID != null && PersonThisID != null)
+                {
+                    foreach(int id in PersonLastID)
                     {
-                        DeleteMarkManager.SendMessage(true, id);
+                        if(!PersonThisID.Contains(id))
+                        {
+                            DeleteMarkManager.SendMessage(true, id);
+                        }
                     }
                 }
-            }
 
-            PersonLastID.Clear();
-            PersonLastID.AddRange(PersonThisID);
-            PersonThisID.Clear();
+                PersonLastID.Clear();
+                PersonLastID.AddRange(PersonThisID);
+                PersonThisID.Clear();
+            }
             
-
-            foreach(ListWrapper risk in carFrameInfo[frameIndex].riskList)
+            if(frameIndex < carFrameInfo.Count)
             {
-                if(risk == null)
-                    continue;
-                Vector2 BboxBL = new Vector2((risk.list[0]/resolution.x)*screenWidth, 
-                    screenHeight - (risk.list[1]/resolution.y)*screenHeight);
-                Vector2 BboxTR = new Vector2((risk.list[2]/resolution.x)*screenWidth, 
-                    screenHeight - (risk.list[3]/resolution.y)*screenHeight);
-                int ID = risk.riskID;
-                JsonMarkManager.SendMessage(new MarkMessage(false, ID, BboxBL, BboxTR));
-                CarThisID.Add(ID);
-            }
-
-
-            if(CarLastID != null && CarThisID != null)
-            {
-                foreach(int id in CarLastID)
+                foreach(ListWrapper risk in carFrameInfo[frameIndex].riskList)
                 {
-                    if(!CarThisID.Contains(id))
+                    if(risk == null)
+                        continue;
+                    Vector2 BboxBL = new Vector2((risk.list[0]/resolution.x)*screenWidth, 
+                        screenHeight - (risk.list[1]/resolution.y)*screenHeight);
+                    Vector2 BboxTR = new Vector2((risk.list[2]/resolution.x)*screenWidth, 
+                        screenHeight - (risk.list[3]/resolution.y)*screenHeight);
+                    int ID = risk.riskID;
+                    JsonMarkManager.SendMessage(new MarkMessage(false, ID, BboxBL, BboxTR));
+                    CarThisID.Add(ID);
+                }
+
+
+                if(CarLastID != null && CarThisID != null)
+                {
+                    foreach(int id in CarLastID)
                     {
-                        DeleteMarkManager.SendMessage(false, id);
+                        if(!CarThisID.Contains(id))
+                        {
+                            DeleteMarkManager.SendMessage(false, id);
+                        }
                     }
                 }
-            }
 
-            CarLastID.Clear();
-            CarLastID.AddRange(CarThisID);
-            CarThisID.Clear();
+                CarLastID.Clear();
+                CarLastID.AddRange(CarThisID);
+                CarThisID.Clear();
+            }
             
             frameIndex ++;
             yield return new WaitForSeconds(ratio);
