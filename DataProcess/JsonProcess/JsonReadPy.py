@@ -16,9 +16,11 @@ def open_json_file(file_path):
 file_name = "easy_1" 
 
 # 构建文件路径  
-file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/b4542860-0b880bb4.json" 
+person_file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/b1c9c847-3bda4659.json" 
+file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/bbox_car_b1c9c847-3bda4659.json" 
 # 打开JSON文件  
 data = open_json_file(file_path) 
+person_data = open_json_file(person_file_path) 
   
 
 # 获取JSON数据的长度  
@@ -63,7 +65,7 @@ for i in range(0, json_length-1):
     # print(index)  
 
     # 访问JSON数据  
-    bbox_data = data[index]['person']
+    bbox_data = person_data[index]['person']
 
 
     if(bbox_data != {}):
@@ -95,7 +97,7 @@ for i in range(0, json_length-1):
          index = str(i+1)
 
     # print(index)  
-    cars_data = [data[index]['car']]##, data[index]['motorcycle'], data[index]['bus'], data[index]['truck'] ]
+    cars_data = [data[index]['car'], data[index]['motorcycle'], data[index]['bus'], data[index]['truck'] ]
 
     if(cars_data != []):
         for car_data in cars_data:
