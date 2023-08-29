@@ -18,7 +18,7 @@ file_name = "b1c9c847-3bda4659"
 # 构建文件路径  
 person_file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/"+file_name+".json" 
 file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/bbox_car_"+file_name+".json" 
-screening_file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/human_select.json" 
+screening_file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/human_select_interval.json" 
 
 # 打开JSON文件  
 data = open_json_file(file_path) 
@@ -53,8 +53,23 @@ event = threading.Event()
 value_str = ""
 value_str = value_str + json.dumps(json_length) + "|*|"
 
-value_str = value_str + "{\"riskList\":" + json.dumps(screening_data[file_name]) + "}" + "|*|"
+value_str = value_str + "{\"riskList\":" + json.dumps(screening_data[file_name]["ids"]) + ", "
 
+value_str = value_str + "\"starting_frame\": ["
+for id in screening_data[file_name]["ids"]:
+    if(json.dumps(screening_data[file_name][str(id)]["starting_frame"]) == "null"):
+        value_str = value_str + "-1 ,"
+    else:
+        value_str = value_str + json.dumps(screening_data[file_name][str(id)]["starting_frame"]) + ","
+value_str = value_str + "0], "
+
+value_str = value_str + "\"ending_frame\": ["
+for id in screening_data[file_name]["ids"]:
+    if(json.dumps(screening_data[file_name][str(id)]["ending_frame"]) == "null"):
+        value_str = value_str + "-1 ,"
+    else:
+        value_str = value_str + json.dumps(screening_data[file_name][str(id)]["ending_frame"]) + ","
+value_str = value_str + "0]}|*|"
 
 for i in range(0, json_length-1):
         

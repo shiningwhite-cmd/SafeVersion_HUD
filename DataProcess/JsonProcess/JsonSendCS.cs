@@ -97,6 +97,7 @@ public class JsonSendCS : MonoBehaviour
         // 处理人
         string[] personStrings = dataStrings[0].Split(new string[] { "|*|" }, StringSplitOptions.None);
         // string riskString = "{\"risk\": " + personStrings[1] + "}";
+        Debug.Log(personStrings[1]);
         riskList = JsonUtility.FromJson<RiskList>(personStrings[1]);
         
         for(int i = 2; i < int.Parse(personStrings[0]); i++)
@@ -205,8 +206,19 @@ public class JsonSendCS : MonoBehaviour
                     Vector2 BboxCenter = (BboxBL + BboxTR)/2;
                     if(BboxCenter.y > screenHeight / 4 && BboxCenter.y < screenHeight * 3 / 4 && riskList.riskList.Contains(ID))
                     {
-                        JsonMarkManager.SendMessage(new MarkMessage(true, ID, BboxBL, BboxTR));
-                        PersonThisID.Add(ID);
+                        if(riskList.ending_frame[riskList.riskList.IndexOf(ID)] != -1 && riskList.starting_frame[riskList.riskList.IndexOf(ID)] != -1)
+                        {
+                            if(frameIndex < riskList.ending_frame[riskList.riskList.IndexOf(ID)] && frameIndex > riskList.starting_frame[riskList.riskList.IndexOf(ID)] )
+                            {
+                                JsonMarkManager.SendMessage(new MarkMessage(true, ID, BboxBL, BboxTR));
+                                PersonThisID.Add(ID);
+                            }
+                        }
+                        else
+                        {
+                            JsonMarkManager.SendMessage(new MarkMessage(true, ID, BboxBL, BboxTR));
+                            PersonThisID.Add(ID);
+                        }
                     }
                 }
 
@@ -327,5 +339,8 @@ public class JsonSendCS : MonoBehaviour
     public class RiskList
     {
         public List<int> riskList;
+        public List<int> starting_frame;
+        
+        public List<int> ending_frame;
     }
 }  
