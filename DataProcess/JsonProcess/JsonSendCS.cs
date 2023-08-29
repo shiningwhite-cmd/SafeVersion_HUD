@@ -217,7 +217,7 @@ public class JsonSendCS : MonoBehaviour
                         else
                         {
                             JsonMarkManager.SendMessage(new MarkMessage(true, ID, BboxBL, BboxTR));
-                            PersonThisID.Add(ID);
+                                PersonThisID.Add(ID);
                         }
                     }
                 }
@@ -250,7 +250,8 @@ public class JsonSendCS : MonoBehaviour
                         screenHeight - (risk.list[3]/resolution.y)*screenHeight);
                     int ID = risk.riskID;
                     Vector2 BboxCenter = (BboxBL + BboxTR)/2;
-                    if(BboxCenter.y > screenHeight / 4 && BboxCenter.y < screenHeight * 3 / 4)
+                    Vector2 BboxScale = new Vector2(- BboxBL.x + BboxTR.x, BboxBL.y - BboxTR.y);
+                    if(BboxCenter.y > screenHeight / 4 && BboxCenter.y < screenHeight * 3 / 4 && BboxCenter.x > screenWidth / 5 && BboxScale.x > 180.0f && BboxScale.y > 90.0f)
                     {
                         JsonMarkManager.SendMessage(new MarkMessage(false, ID, BboxBL, BboxTR));
                         CarThisID.Add(ID);
