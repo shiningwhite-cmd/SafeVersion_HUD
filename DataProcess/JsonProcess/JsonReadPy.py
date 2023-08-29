@@ -13,14 +13,17 @@ def open_json_file(file_path):
              data = json.load(file) 
              return data 
 # 文件名  在这里改变视频名
-file_name = "easy_1" 
+file_name = "b1c9c847-3bda4659" 
 
 # 构建文件路径  
-person_file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/b1c9c847-3bda4659.json" 
-file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/bbox_car_b1c9c847-3bda4659.json" 
+person_file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/"+file_name+".json" 
+file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/bbox_car_"+file_name+".json" 
+screening_file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/human_select.json" 
+
 # 打开JSON文件  
 data = open_json_file(file_path) 
-person_data = open_json_file(person_file_path) 
+person_data = open_json_file(person_file_path)
+screening_data = open_json_file(screening_file_path) 
   
 
 # 获取JSON数据的长度  
@@ -49,6 +52,8 @@ event = threading.Event()
 
 value_str = ""
 value_str = value_str + json.dumps(json_length) + "|*|"
+
+value_str = value_str + "{\"riskList\":" + json.dumps(screening_data[file_name]) + "}" + "|*|"
 
 
 for i in range(0, json_length-1):
@@ -125,7 +130,7 @@ for chunk in chunks:
     # print(chunk)
     client_socket.send(chunk.encode())
 
-    
+
 # 关闭连接  
 client_socket.close()  
 server_socket.close()  

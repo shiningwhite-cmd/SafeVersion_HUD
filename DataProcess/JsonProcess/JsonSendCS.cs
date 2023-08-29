@@ -37,6 +37,7 @@ public class JsonSendCS : MonoBehaviour
     float ratio = 0.033f;
     public Vector2 resolution = new Vector2(1280.0f, 720.0f);
     string[] dataStrings;
+    RiskList riskList = new RiskList();
 
     void Start()  
     {  
@@ -95,9 +96,10 @@ public class JsonSendCS : MonoBehaviour
     {
         // 处理人
         string[] personStrings = dataStrings[0].Split(new string[] { "|*|" }, StringSplitOptions.None);
+        // string riskString = "{\"risk\": " + personStrings[1] + "}";
+        riskList = JsonUtility.FromJson<RiskList>(personStrings[1]);
         
-        
-        for(int i = 1; i < int.Parse(personStrings[0]); i++)
+        for(int i = 2; i < int.Parse(personStrings[0]); i++)
         {  
             if(personStrings[i] == "")
             {
@@ -112,7 +114,7 @@ public class JsonSendCS : MonoBehaviour
             FrameInfo singleFrame = new FrameInfo();
             singleFrame.riskList = new List<ListWrapper>();
             string[] riskStringsinFrame = personStrings[i].Split(new string[] { "|#|" }, StringSplitOptions.None);
-            Debug.Log(riskStringsinFrame);
+            // Debug.Log(riskStringsinFrame);
 
             foreach(string riskStringinFrame in riskStringsinFrame)
             {
@@ -201,7 +203,7 @@ public class JsonSendCS : MonoBehaviour
                         screenHeight - (risk.list[3]/resolution.y)*screenHeight);
                     int ID = risk.riskID;
                     Vector2 BboxCenter = (BboxBL + BboxTR)/2;
-                    if(BboxCenter.y > screenHeight / 4 && BboxCenter.y < screenHeight * 3 / 4)
+                    if(BboxCenter.y > screenHeight / 4 && BboxCenter.y < screenHeight * 3 / 4 && riskList.riskList.Contains(ID))
                     {
                         JsonMarkManager.SendMessage(new MarkMessage(true, ID, BboxBL, BboxTR));
                         PersonThisID.Add(ID);
@@ -319,5 +321,11 @@ public class JsonSendCS : MonoBehaviour
     public class FrameInfo
     {
         public List<ListWrapper> riskList;
+    }
+    
+    [System.Serializable]
+    public class RiskList
+    {
+        public List<int> riskList;
     }
 }  
