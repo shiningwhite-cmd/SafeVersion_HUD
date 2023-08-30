@@ -16,13 +16,13 @@ def open_json_file(file_path):
 file_name = "b1c9c847-3bda4659" 
 
 # 构建文件路径  
-person_file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/"+file_name+".json" 
-file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/bbox_car_"+file_name+".json" 
+# person_file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/"+file_name+".json" 
+file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/all_"+file_name+".json" 
 screening_file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/human_select_interval.json" 
 
 # 打开JSON文件  
 data = open_json_file(file_path) 
-person_data = open_json_file(person_file_path)
+person_data = open_json_file(file_path)
 screening_data = open_json_file(screening_file_path) 
   
 
