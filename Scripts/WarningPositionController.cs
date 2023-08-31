@@ -69,10 +69,10 @@ public class WarningPositionController : MonoBehaviour
                 // mark.transform.position = markPos;
                 
                 mark.GetComponent<WarningPosChanger>().MoveWarning(markPos);
-                if(diagonal.x < 90.0f)
-                    mark.GetComponent<Transform>().localScale = new Vector3(0.6f, 0.6f, 0.6f);
-                else
-                    mark.GetComponent<Transform>().localScale = new Vector3(1f, 1f, 1f);
+                // if(diagonal.x < 90.0f)
+                //     mark.GetComponent<Transform>().localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                // else
+                //     mark.GetComponent<Transform>().localScale = new Vector3(1f, 1f, 1f);
             }
             // 如果不存在，复制一个
             else
@@ -80,13 +80,13 @@ public class WarningPositionController : MonoBehaviour
                 ExistingCarMark.Add(markID);
                 GameObject mark = Instantiate(CarMarkPrefab,  markPos, new Quaternion(), MarkPanel);
                 mark.name = "CarWarning"+markID.ToString();
-                if(diagonal.x < 180.0f)
-                {
-                    mark.GetComponent<RectTransform>().localScale = new Vector3(0.6f, 0.6f, 0.6f);
-                    Debug.Log("small");
-                }
-                else
-                    mark.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+                // if(diagonal.x < 180.0f)
+                // {
+                //     mark.GetComponent<RectTransform>().localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                //     Debug.Log("small");
+                // }
+                // else
+                //     mark.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
                 mark.GetComponent<CarWarningSender>().Send(markID);
             }
         }

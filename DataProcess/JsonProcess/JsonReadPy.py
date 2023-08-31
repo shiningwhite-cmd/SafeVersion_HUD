@@ -13,12 +13,12 @@ def open_json_file(file_path):
              data = json.load(file) 
              return data 
 # 文件名  在这里改变视频名
-file_name = "b1c9c847-3bda4659" 
+file_name = "b2bee3e1-80c787bd" 
 
 # 构建文件路径  
 # person_file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/"+file_name+".json" 
 file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/all_"+file_name+".json" 
-screening_file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/human_select_interval.json" 
+screening_file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/llm_select_interval_v1.json" 
 
 # 打开JSON文件  
 data = open_json_file(file_path) 

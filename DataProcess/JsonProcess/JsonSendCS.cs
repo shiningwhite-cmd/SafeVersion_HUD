@@ -34,14 +34,18 @@ public class JsonSendCS : MonoBehaviour
     List<FrameInfo> carFrameInfo = new List<FrameInfo>();
 
     private int frameIndex = 0;
-    float ratio = 0.033f;
+    public float ratio = 0.033f;
     public Vector2 resolution = new Vector2(1280.0f, 720.0f);
     string[] dataStrings;
     RiskList riskList = new RiskList();
+    public bool withPerson;
+    public bool noMark;
+    public float gameDuration;
+    public GameObject mask;
 
     void Start()  
     {  
-        Application.targetFrameRate = 30;
+        // Application.targetFrameRate = 30;
 
         videoPlayControler.PlayVideo();
         
@@ -49,8 +53,17 @@ public class JsonSendCS : MonoBehaviour
 
         processData();
 
-        StartCoroutine(sendMessage());
+        Invoke("EndGame", gameDuration);
+        // StartCoroutine(sendMessage());
     }  
+
+    /// <summary>
+    /// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
+    /// </summary>
+    void FixedUpdate()
+    {
+        sendMessage();
+    }
 
     private void ReceiveFromPython()  
     {  
@@ -93,6 +106,11 @@ public class JsonSendCS : MonoBehaviour
         // Debug.Log("Received Data: " + collectedData); 
     } 
 
+    private void EndGame()  
+    {  
+        Time.timeScale = 0f;
+        mask.SetActive(true);
+    }  
 
     private void processData()
     {
@@ -190,54 +208,57 @@ public class JsonSendCS : MonoBehaviour
 
     }  
 
-    IEnumerator sendMessage()
+    void sendMessage()
     {
-        while(true)
+        if(!noMark)
         {
-            if(frameIndex < personFrameInfo.Count)
+            if(withPerson)
             {
-                foreach(ListWrapper risk in personFrameInfo[frameIndex].riskList)
+                if(frameIndex < personFrameInfo.Count)
                 {
-                    if(risk == null)
-                        continue;
-                    Vector2 BboxBL = new Vector2((risk.list[0]/resolution.x)*screenWidth, 
-                        screenHeight - (risk.list[1]/resolution.y)*screenHeight);
-                    Vector2 BboxTR = new Vector2((risk.list[2]/resolution.x)*screenWidth, 
-                        screenHeight - (risk.list[3]/resolution.y)*screenHeight);
-                    int ID = risk.riskID;
-                    Vector2 BboxCenter = (BboxBL + BboxTR)/2;
-                    if(BboxCenter.y > screenHeight / 4 && BboxCenter.y < screenHeight * 3 / 4 && riskList.riskList.Contains(ID))
+                    foreach(ListWrapper risk in personFrameInfo[frameIndex].riskList)
                     {
-                        if(riskList.ending_frame[riskList.riskList.IndexOf(ID)] != -1 && riskList.starting_frame[riskList.riskList.IndexOf(ID)] != -1)
+                        if(risk == null)
+                            continue;
+                        Vector2 BboxBL = new Vector2((risk.list[0]/resolution.x)*screenWidth, 
+                            screenHeight - (risk.list[1]/resolution.y)*screenHeight);
+                        Vector2 BboxTR = new Vector2((risk.list[2]/resolution.x)*screenWidth, 
+                            screenHeight - (risk.list[3]/resolution.y)*screenHeight);
+                        int ID = risk.riskID;
+                        Vector2 BboxCenter = (BboxBL + BboxTR)/2;
+                        if(riskList.riskList.Contains(ID))
                         {
-                            if(frameIndex < riskList.ending_frame[riskList.riskList.IndexOf(ID)] && frameIndex > riskList.starting_frame[riskList.riskList.IndexOf(ID)] )
+                            if(riskList.ending_frame[riskList.riskList.IndexOf(ID)] != -1 && riskList.starting_frame[riskList.riskList.IndexOf(ID)] != -1)
+                            {
+                                if(frameIndex < riskList.ending_frame[riskList.riskList.IndexOf(ID)] && frameIndex > riskList.starting_frame[riskList.riskList.IndexOf(ID)] )
+                                {
+                                    JsonMarkManager.SendMessage(new MarkMessage(true, ID, BboxBL, BboxTR));
+                                    PersonThisID.Add(ID);
+                                }
+                            }
+                            else
                             {
                                 JsonMarkManager.SendMessage(new MarkMessage(true, ID, BboxBL, BboxTR));
-                                PersonThisID.Add(ID);
+                                    PersonThisID.Add(ID);
                             }
                         }
-                        else
-                        {
-                            JsonMarkManager.SendMessage(new MarkMessage(true, ID, BboxBL, BboxTR));
-                                PersonThisID.Add(ID);
-                        }
                     }
-                }
 
-                if(PersonLastID != null && PersonThisID != null)
-                {
-                    foreach(int id in PersonLastID)
+                    if(PersonLastID != null && PersonThisID != null)
                     {
-                        if(!PersonThisID.Contains(id))
+                        foreach(int id in PersonLastID)
                         {
-                            DeleteMarkManager.SendMessage(true, id);
+                            if(!PersonThisID.Contains(id))
+                            {
+                                DeleteMarkManager.SendMessage(true, id);
+                            }
                         }
                     }
-                }
 
-                PersonLastID.Clear();
-                PersonLastID.AddRange(PersonThisID);
-                PersonThisID.Clear();
+                    PersonLastID.Clear();
+                    PersonLastID.AddRange(PersonThisID);
+                    PersonThisID.Clear();
+                }
             }
             
             if(frameIndex < carFrameInfo.Count)
@@ -253,7 +274,7 @@ public class JsonSendCS : MonoBehaviour
                     int ID = risk.riskID;
                     Vector2 BboxCenter = (BboxBL + BboxTR)/2;
                     Vector2 BboxScale = new Vector2(- BboxBL.x + BboxTR.x, BboxBL.y - BboxTR.y);
-                    if(BboxCenter.y > screenHeight / 4 && BboxCenter.y < screenHeight * 3 / 4 && BboxScale.x > 180.0f && BboxScale.y > 90.0f)
+                    if(BboxCenter.y > screenHeight / 4 && BboxCenter.y < screenHeight * 3 / 4 && BboxScale.x > 360.0f && BboxScale.y > 180.0f)
                     {
                         JsonMarkManager.SendMessage(new MarkMessage(false, ID, BboxBL, BboxTR));
                         CarThisID.Add(ID);
@@ -276,18 +297,17 @@ public class JsonSendCS : MonoBehaviour
                 CarLastID.AddRange(CarThisID);
                 CarThisID.Clear();
             }
-            
-            frameIndex ++;
-            yield return new WaitForSeconds(ratio);
-
-            Debug.Log("This Frame:"+frameIndex);
-            
-            if(frameIndex % 3 == 0)
-            {
-                // yield return new WaitForSeconds(0.003f);
-            }
-            
         }
+        frameIndex ++;
+        // yield return new WaitForSeconds(ratio);
+
+        Debug.Log("This Frame:"+frameIndex);
+        
+        // if(frameIndex % 3 == 0)
+        // {
+        //     // yield return new WaitForSeconds(0.01f);
+        // }
+        
     }
 
     private void endReceive()
