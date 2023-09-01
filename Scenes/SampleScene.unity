@@ -322,7 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad307dc70b4619b49b294dc1b705e0d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTestMode: 1
+  isTestMode: 0
 --- !u!114 &580122330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,9 +353,9 @@ MonoBehaviour:
   videoPlayControler: {fileID: 1202140526}
   ratio: 0.033
   resolution: {x: 1280, y: 720}
-  withPerson: 0
-  noMark: 1
-  gameDuration: 21
+  withPerson: 1
+  noMark: 0
+  gameDuration: 9
   mask: {fileID: 1894665780}
 --- !u!114 &580122332
 MonoBehaviour:
@@ -927,7 +927,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1202140521}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: e9654d8483012954fa83d2b87577d929, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 2d3629d853d0ca946b83e306855bc922, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -1336,11 +1336,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3189050310798385125, guid: c225cbb70f682d94481c624c0fdb77a6, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 130
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3189050310798385125, guid: c225cbb70f682d94481c624c0fdb77a6, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 160
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3189050310798385125, guid: c225cbb70f682d94481c624c0fdb77a6, type: 3}
       propertyPath: m_LocalScale.x
@@ -1404,6 +1404,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3189050310798385125, guid: c225cbb70f682d94481c624c0fdb77a6, type: 3}
       propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3189050311588213805, guid: c225cbb70f682d94481c624c0fdb77a6, type: 3}
+      propertyPath: m_Type
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
