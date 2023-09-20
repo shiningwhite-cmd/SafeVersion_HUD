@@ -7,9 +7,29 @@ import threading
 current_directory = os.getcwd()  
 print("当前工作目录：", current_directory)
 
+<<<<<<< Updated upstream
 # 读取JSON文件  
 with open(r'Assets/DataProcess/JsonProcess/JsonFiles/Bbox_Video_fe0a.json') as file:  
     data = json.load(file)  
+=======
+# 读取JSON文件  
+def open_json_file(file_path):
+     with open(file_path) as file: 
+             data = json.load(file) 
+             return data 
+# 文件名  在这里改变视频名
+file_name = "b2be7200-b6f7fe0a" 
+
+# 构建文件路径  
+# person_file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/"+file_name+".json" 
+file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/all_"+file_name+".json" 
+screening_file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/llm_select_interval_v1.json" 
+
+# 打开JSON文件  
+data = open_json_file(file_path) 
+person_data = open_json_file(file_path)
+screening_data = open_json_file(screening_file_path) 
+>>>>>>> Stashed changes
   
 
 # 获取JSON数据的长度  
