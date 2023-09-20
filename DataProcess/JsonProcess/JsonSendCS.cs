@@ -274,7 +274,7 @@ public class JsonSendCS : MonoBehaviour
                     int ID = risk.riskID;
                     Vector2 BboxCenter = (BboxBL + BboxTR)/2;
                     Vector2 BboxScale = new Vector2(- BboxBL.x + BboxTR.x, BboxBL.y - BboxTR.y);
-                    if(BboxCenter.y > screenHeight / 4 && BboxCenter.y < screenHeight * 3 / 4 && BboxScale.x > 480.0f && BboxScale.y > 270.0f)
+                    if(BboxCenter.y > screenHeight / 4 && BboxCenter.y < screenHeight * 3 / 4 && BboxScale.x > 360.0f && BboxScale.y > 180.0f)
                     {
                         JsonMarkManager.SendMessage(new MarkMessage(false, ID, BboxBL, BboxTR));
                         CarThisID.Add(ID);

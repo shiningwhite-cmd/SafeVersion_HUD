@@ -47,7 +47,7 @@ public class WarningPositionController : MonoBehaviour
                 // mark.transform.position = markPos;
                 
                 mark.GetComponent<WarningPosChanger>().MoveWarning(markPos);
-                mark.GetComponent<RectTransform>().sizeDelta = diagonal/2;
+                mark.GetComponent<RectTransform>().sizeDelta = diagonal;
             }
             // 如果不存在，复制一个
             else
@@ -56,7 +56,7 @@ public class WarningPositionController : MonoBehaviour
                 GameObject mark = Instantiate(HumanMarkPrefab,  markPos, new Quaternion(), MarkPanel);
                 mark.name = "HumanWarning"+markID.ToString();
                 mark.GetComponent<HumanWarningSender>().Send(markID);
-                mark.GetComponent<RectTransform>().sizeDelta = diagonal/2;
+                mark.GetComponent<RectTransform>().sizeDelta = diagonal;
             }
         }
         else
