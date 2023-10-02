@@ -354,8 +354,8 @@ MonoBehaviour:
   ratio: 0.033
   resolution: {x: 1280, y: 720}
   withPerson: 0
-  noMark: 1
-  gameDuration: 21
+  noMark: 0
+  gameDuration: 40
   mask: {fileID: 1894665780}
 --- !u!114 &580122332
 MonoBehaviour:
@@ -927,7 +927,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1202140521}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: e9654d8483012954fa83d2b87577d929, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: deb8ee412ad5e964e866f7c2d3e19285, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}

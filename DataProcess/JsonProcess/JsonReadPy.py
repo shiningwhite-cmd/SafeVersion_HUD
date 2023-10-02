@@ -13,7 +13,7 @@ def open_json_file(file_path):
              data = json.load(file) 
              return data 
 # 文件名  在这里改变视频名
-file_name = "b2bee3e1-80c787bd" 
+file_name = "cd26264b-22001629" 
 
 # 构建文件路径  
 # person_file_path = f"./Assets/DataProcess/JsonProcess/JsonFiles/"+file_name+".json" 
